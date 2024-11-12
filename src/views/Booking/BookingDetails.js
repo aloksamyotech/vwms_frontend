@@ -7,11 +7,8 @@ import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { url } from 'api/url';
 import { allEmployee, editBooking } from 'api/apis';
-const data = '';
 
 const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
-  console.log(`bookingData`, bookingData);
-
   const [employees, setEmployees] = useState([]);
   const [packages, setPackage] = useState([]);
   const [assigned, setAssigned] = useState('');
@@ -24,7 +21,6 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
     const com_url = `${url.base_url}${url.employee.all}`;
     try {
       const response = await allEmployee(com_url);
-      console.log(`employee response `, response);
       if (response) {
         setEmployees(response.data);
       } else {
@@ -64,28 +60,20 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
     enableReinitialize: true,
     onSubmit: async (values, { resetForm }) => {
       const id = bookingData?._id;
-
       const data = {
         status: values.status,
         assignedTo: values.assignedTo,
         slot_time: bookingData?.slot_time
       };
       setAssigned(values.assignedTo);
-
       const com_url = `${url.base_url}${url.booking.edit}${id}`;
-
       try {
         const response = await editBooking(com_url, data);
-
-        console.log(`response of booking update----`, response);
-
         if (response) {
           await onSuccess();
           toast.success('Successfully Updated');
           resetForm();
           handleClose();
-        } else if (response.message == 'Slot Not Available') {
-          toast.warning('Slot Not Available');
         } else {
           toast.error('Update Failed');
         }
@@ -94,9 +82,7 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
       }
     }
   });
-
   const filteredEmployees = employees;
-
   return (
     <Dialog open={open} onClose={handleClose} aria-labelledby="booking-details-dialog-title">
       <DialogTitle
