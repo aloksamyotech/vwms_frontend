@@ -7,15 +7,14 @@ import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { url } from 'api/url';
 import { allEmployee, editBooking } from 'api/apis';
-const data = ''
+const data = '';
 
 const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
-  console.log(`bookingData`,bookingData);
-  
+  console.log(`bookingData`, bookingData);
+
   const [employees, setEmployees] = useState([]);
   const [packages, setPackage] = useState([]);
   const [assigned, setAssigned] = useState('');
-
 
   const validationSchema = yup.object({
     status: yup.string().required('Status is required')
@@ -25,6 +24,7 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
     const com_url = `${url.base_url}${url.employee.all}`;
     try {
       const response = await allEmployee(com_url);
+      console.log(`employee response `, response);
       if (response) {
         setEmployees(response.data);
       } else {
@@ -57,12 +57,14 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
   const formik = useFormik({
     initialValues: {
       status: bookingData?.serviceStatus || '',
-      assignedTo: data|| ''
+      assignedTo: bookingData?.employeeFirstName ? bookingData?.employeeFirstName : ''
     },
+
     validationSchema,
     enableReinitialize: true,
     onSubmit: async (values, { resetForm }) => {
       const id = bookingData?._id;
+
       const data = {
         status: values.status,
         assignedTo: values.assignedTo,
@@ -75,9 +77,8 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
       try {
         const response = await editBooking(com_url, data);
 
-        console.log(`response of booking update----`,response);
-        
-        
+        console.log(`response of booking update----`, response);
+
         if (response) {
           await onSuccess();
           toast.success('Successfully Updated');
@@ -96,15 +97,15 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
 
   const filteredEmployees = employees;
 
-  
-
   return (
     <Dialog open={open} onClose={handleClose} aria-labelledby="booking-details-dialog-title">
       <DialogTitle
         id="booking-details-dialog-title"
         sx={{ display: 'flex', justifyContent: 'space-between', bgcolor: '#3f51b5', color: 'white', padding: '16px' }}
       >
-        <Typography variant="h6" sx={{color: 'white'}}>Change Booking Status</Typography>
+        <Typography variant="h6" sx={{ color: 'white' }}>
+          Change Booking Status
+        </Typography>
         <ClearIcon onClick={handleClose} sx={{ cursor: 'pointer', color: 'white' }} />
       </DialogTitle>
 
