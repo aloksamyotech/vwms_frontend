@@ -43,12 +43,6 @@ const Documents = () => {
       flex: 0.7,
       valueFormatter: (params) => moment(params.value).format('MM:DD:YYYY')
     },
-    // {
-    //   field: 'time',
-    //   headerName: 'Time',
-    //   flex: 0.7,
-    //   valueFormatter: (params) => moment(params.value).format('HH:mm')
-    // },
     {
       field: 'paymentStatus',
       headerName: 'Payment Status',
@@ -89,7 +83,7 @@ const Documents = () => {
               padding: '6px',
               borderRadius: '6px',
               textAlign: 'center',
-              maxWidth : '100px'
+              maxWidth: '100px'
             }}
           >
             {params.value}
