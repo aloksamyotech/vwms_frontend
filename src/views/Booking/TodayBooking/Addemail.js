@@ -20,6 +20,7 @@ import { useState, useEffect } from 'react';
 const AddEmails = (props) => {
   const { open, handleClose, onSuccess } = props;
   const [allServices, setAllService] = useState([]);
+  const [allPackage, setAllPackage] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object({
@@ -67,9 +68,10 @@ const AddEmails = (props) => {
   });
 
   const fetchService = async () => {
-    const com_url = `${url.base_url}${url.service.all_service}`;
+    const com_url = `${url.base_url}${url.vehicle_type.all}`;
 
     const response = await allService(com_url);
+
     if (response) {
       setAllService(response.data);
     } else {
@@ -91,7 +93,7 @@ const AddEmails = (props) => {
             justifyContent: 'space-between'
           }}
         >
-          <Typography variant="h6">Add New Package</Typography>
+          <Typography variant="h6">New Booking</Typography>
           <ClearIcon onClick={handleClose} style={{ cursor: 'pointer' }} />
         </DialogTitle>
 
@@ -100,7 +102,7 @@ const AddEmails = (props) => {
             <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
               <Grid container rowSpacing={3} columnSpacing={{ xs: 0, sm: 5, md: 4 }}>
                 <Grid item xs={12} sm={6} md={6}>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Customer Name</FormLabel>
                   <TextField
                     id="name"
                     name="name"
@@ -114,7 +116,7 @@ const AddEmails = (props) => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6} md={6}>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Customer Email</FormLabel>
                   <TextField
                     id="email"
                     name="email"
@@ -129,7 +131,7 @@ const AddEmails = (props) => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6}>
-                  <FormLabel>Phone</FormLabel>
+                  <FormLabel>Customer Phone</FormLabel>
                   <TextField
                     id="phone"
                     name="phone"
@@ -158,7 +160,7 @@ const AddEmails = (props) => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={6}>
                   <FormControl fullWidth>
-                    <FormLabel>Service</FormLabel>
+                    <FormLabel>Vehicle Type</FormLabel>
                     <Select
                       labelId="service-select-label"
                       id="services"
@@ -171,7 +173,7 @@ const AddEmails = (props) => {
                     >
                       {allServices?.map((service) => (
                         <MenuItem key={service?._id} value={service?._id}>
-                          {service.name}
+                          {service.vehicleName}
                         </MenuItem>
                       ))}
                     </Select>

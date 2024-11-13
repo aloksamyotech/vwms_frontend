@@ -40,19 +40,19 @@ const Lead = () => {
     },
     {
       field: 'vehicleType',
-      headerName: 'Vehicle Type',
+      headerName: 'Vehicle Name',
       flex: 1,
       cellClassName: 'name-column--cell--capitalize'
     },
     {
       field: 'desc',
-      headerName: 'Services',
-      flex: 1
+      headerName: 'Description',
+      flex: 1.2
     },
     {
       field: 'price',
       headerName: 'Price',
-      flex: 1
+      flex: 0.6
     },
     {
       field: 'time',
