@@ -15,7 +15,7 @@ import { IconEdit } from '@tabler/icons'; //
 
 const Documents = () => {
   const [openAdd, setOpenAdd] = useState(false);
-  
+
   const [bookingData, setBookingData] = useState([]);
   const [showData, setShowData] = useState([]);
   const [showBookingData, setShowBookingData] = useState([]);

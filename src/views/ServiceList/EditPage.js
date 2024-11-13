@@ -21,7 +21,7 @@ import { useState } from 'react';
 
 const AddMeetings = (props) => {
   const { open, handleClose, EditData, onSuccess } = props;
-  const [isLoading , setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object({
     name: yup.string().required('Name is required').max(50, 'Enter less than 50 characters'),
@@ -47,7 +47,7 @@ const AddMeetings = (props) => {
     validationSchema,
     enableReinitialize: true,
     onSubmit: async (values, { resetForm }) => {
-      setIsLoading(true)
+      setIsLoading(true);
       const id = EditData?._id;
 
       const com_url = `${url.base_url}${url.service.edit}${id}`;
@@ -61,7 +61,7 @@ const AddMeetings = (props) => {
       } else {
         toast.warning('Edit Failed');
       }
-      setIsLoading(false)
+      setIsLoading(false);
     }
   });
 
@@ -177,7 +177,7 @@ const AddMeetings = (props) => {
             </DialogContentText>
             <DialogActions>
               <Button type="submit" variant="contained" style={{ textTransform: 'capitalize' }} color="secondary" disabled={isLoading}>
-              {isLoading ? 'Updating...' : 'Update'}
+                {isLoading ? 'Updating...' : 'Update'}
               </Button>
               <Button
                 type="button"

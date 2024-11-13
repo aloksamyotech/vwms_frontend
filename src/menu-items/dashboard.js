@@ -1,6 +1,3 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-
-// assets
 import {
   IconHome,
   IconPackage,
@@ -22,7 +19,6 @@ import {
   IconBus
 } from '@tabler/icons';
 
-// constant
 const icons = {
   IconHome,
   IconHistory,
@@ -43,8 +39,6 @@ const icons = {
   IconPhoneCheck,
   IconUsers
 };
-
-// ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
 const dashboard = {
   title: 'Dashboard-Menu',
@@ -234,7 +228,7 @@ const dashboard = {
           type: 'item',
           url: '/dashboard/user/usermanagement',
           breadcrumbs: false
-        },
+        }
         // {
         //   id: '19',
         //   title: 'Add User',

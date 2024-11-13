@@ -38,7 +38,6 @@ const AddUserDialog = ({ open, handleClose, onSuccess }) => {
             try {
               const com_url = `${url.base_url}${url.employee.create}`;
               const response = await createEmployee(com_url, values);
-              console.log(`response`, response);
 
               if (response?.data?.message === 'Already Exist') {
                 toast.warning('Employee already exists');

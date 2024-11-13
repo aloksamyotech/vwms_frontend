@@ -54,7 +54,6 @@ const AddLead = (props) => {
       const com_url = `${url.base_url}${url.package.create}`;
 
       const response = await createPackage(com_url, values);
-      console.log(`response`, response);
 
       if (response) {
         await onSuccess();

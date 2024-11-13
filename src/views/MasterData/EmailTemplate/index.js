@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { Stack, Button, Alert, Container, Typography, Box, Card } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { IconTrash, IconEdit } from '@tabler/icons'; 
+import { IconTrash, IconEdit } from '@tabler/icons';
 
 import Iconify from '../../../ui-component/iconify';
 import TableStyle from '../../../ui-component/TableStyle';
@@ -68,7 +68,6 @@ const EmailTemplate = () => {
     const com_url = `${url.base_url}${url.template.emailtemplate}`;
     try {
       const response = await allEmailTemplate(com_url);
-      console.log(`response?.data`, response?.data);
 
       if (response) {
         setAllTemplateDate(response?.data);

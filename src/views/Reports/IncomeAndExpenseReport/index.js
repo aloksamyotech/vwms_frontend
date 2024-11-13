@@ -3,9 +3,7 @@ import { Stack, Button, Container, Typography, Card, Grid, Box, FormLabel, TextF
 import { Formik, Form, Field } from 'formik';
 
 const EmailTemplates = () => {
-  const handleSubmit = (values) => {
-    console.log(values);
-  };
+  const handleSubmit = (values) => {};
 
   return (
     <Container>

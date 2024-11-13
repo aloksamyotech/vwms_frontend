@@ -16,7 +16,7 @@ import { createInAndEx } from 'api/apis';
 import { useState } from 'react';
 
 const AddTask = ({ open, handleClose, onSuccess }) => {
-  const [isLoading , setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const validationSchema = yup.object({
     description: yup
       .string()
@@ -38,7 +38,7 @@ const AddTask = ({ open, handleClose, onSuccess }) => {
     initialValues,
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
-      setIsLoading(true)
+      setIsLoading(true);
       const com_url = `${url.base_url}${url.inAndEx.create_inAndEx}`;
       const response = createInAndEx(com_url, values);
       if (response) {
@@ -50,7 +50,7 @@ const AddTask = ({ open, handleClose, onSuccess }) => {
         console.error(`error: ${err}`);
         toast.warning('Not created!');
       }
-      setIsLoading(false)
+      setIsLoading(false);
     }
   });
 
@@ -147,8 +147,15 @@ const AddTask = ({ open, handleClose, onSuccess }) => {
           </form>
         </DialogContent>
         <DialogActions>
-          <Button type="submit" variant="contained" onClick={formik.handleSubmit} style={{ textTransform: 'capitalize' }} color="secondary" disabled={isLoading}>
-          {isLoading ? 'Saving...' : 'Save'}
+          <Button
+            type="submit"
+            variant="contained"
+            onClick={formik.handleSubmit}
+            style={{ textTransform: 'capitalize' }}
+            color="secondary"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Saving...' : 'Save'}
           </Button>
           <Button
             type="reset"

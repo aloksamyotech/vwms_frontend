@@ -20,7 +20,6 @@ import Palette from '../../ui-component/ThemePalette';
 const AddContact = (props) => {
   const { open, handleClose } = props;
 
-
   const validationSchema = yup.object({
     firstName: yup.string().required('First Name is required'),
     lastName: yup.string().required('Last Name is required'),
@@ -35,7 +34,6 @@ const AddContact = (props) => {
     alternatePhoneNumber: yup.string().matches(/^[0-9]{10}$/, 'Phone number is invalid'),
     additionalEmailAddress: yup.string().email('Invalid email')
   });
-
 
   const initialValues = {
     firstName: '',
@@ -55,16 +53,12 @@ const AddContact = (props) => {
     relationshipToReferrer: '',
     preferencesForMarketingCommunications: '',
     preferredLanguage: ''
-
   };
-
 
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-
-      console.log('ContactValues', values);
       handleClose();
       toast.success('Contact Add successfully');
     }

@@ -52,7 +52,7 @@ export const url = {
     all: 'employee/all',
     edit: 'employee/edit/'
   },
-  payments : {
-    edit : 'payment/edit/'
+  payments: {
+    edit: 'payment/edit/'
   }
 };

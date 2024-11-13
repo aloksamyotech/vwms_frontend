@@ -15,8 +15,8 @@ import { createTemplate } from 'api/apis';
 import { useState } from 'react';
 
 const AddLead = (props) => {
-  const { open, handleClose , onSuccess } = props;
-  const [ isLoading , setIsLoading] = useState(false)
+  const { open, handleClose, onSuccess } = props;
+  const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object({
     name: yup.string().required('Required field').max(50, 'Enter less than 50 characters'),
@@ -41,17 +41,16 @@ const AddLead = (props) => {
           validationSchema={validationSchema}
           onSubmit={async (values) => {
             try {
-              setIsLoading(true)
+              setIsLoading(true);
               const com_url = `${url.base_url}${url.template.create}`;
               const response = await createTemplate(com_url, values);
-              await onSuccess()
+              await onSuccess();
               toast.success(`Successfully Created`);
               handleClose();
             } catch (error) {
-              console.log(`error ${error}`);
               toast.error(`Not Created`);
             }
-            setIsLoading(false)
+            setIsLoading(false);
           }}
         >
           {({ values, handleChange, errors, touched }) => (
@@ -92,7 +91,7 @@ const AddLead = (props) => {
               </Grid>
               <DialogActions>
                 <Button variant="contained" color="primary" type="submit" disabled={isLoading}>
-                {isLoading ? 'Saving...' : 'Save'}
+                  {isLoading ? 'Saving...' : 'Save'}
                 </Button>
                 <Button onClick={handleClose} variant="outlined" color="error">
                   Cancel

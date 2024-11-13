@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -19,8 +18,8 @@ import { createOutOfService } from 'api/apis';
 import { useState } from 'react';
 
 const AddPolicy = (props) => {
-  const { open, handleClose , onSuccess } = props;
-  const [isLoading , setIsLoading] = useState(false)
+  const { open, handleClose, onSuccess } = props;
+  const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object({
     desc: yup.string().required('Service Description is required'),
@@ -38,7 +37,7 @@ const AddPolicy = (props) => {
     initialValues,
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
-      setIsLoading(true)
+      setIsLoading(true);
       const formateStartDate = moment(values.startDate).format('YYYY-MM-DD hh:mm A');
       const formateEndDate = moment(values.endDate).format('YYYY-MM-DD hh:mm A');
       const data = {
@@ -50,18 +49,17 @@ const AddPolicy = (props) => {
       const com_url = `${url.base_url}${url.out_of_service.create}`;
 
       const response = await createOutOfService(com_url, data);
-      
-      
+
       if (response) {
         toast.success(`Successfully Created`);
-        await onSuccess()
+        await onSuccess();
         resetForm();
         handleClose();
       } else {
         console.error(`error: ${err}`);
         toast.warning('Not created');
       }
-      setIsLoading(false)
+      setIsLoading(false);
     }
   });
 
@@ -137,7 +135,7 @@ const AddPolicy = (props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={formik.handleSubmit} variant="contained" color="primary" disabled={isLoading}>
-          {isLoading ? 'Saving...' : 'Save'}
+            {isLoading ? 'Saving...' : 'Save'}
           </Button>
           <Button
             onClick={() => {

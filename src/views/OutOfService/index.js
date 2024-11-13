@@ -85,7 +85,7 @@ const PolicyManagement = () => {
         const com_url = `${url.base_url}${url.out_of_service.delete}${id}`;
 
         const response = await deleteOutOfService(com_url);
-        await fetchData()
+        await fetchData();
         toast.success('Service deleted successfully');
       } catch (error) {
         toast.error('Error deleting service');
@@ -94,7 +94,6 @@ const PolicyManagement = () => {
         setSelectedRow(null);
       }
     }
-
   };
 
   const handleOpenAdd = () => setOpenAdd(true);
@@ -112,13 +111,12 @@ const PolicyManagement = () => {
     }
   };
   useEffect(() => {
-  
     fetchData();
   }, []);
 
   return (
     <>
-      <AddPolicy open={openAdd} handleClose={handleCloseAdd} onSuccess={fetchData}/>
+      <AddPolicy open={openAdd} handleClose={handleCloseAdd} onSuccess={fetchData} />
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
           <Typography variant="h3">Out of service(Schedule Holidays)</Typography>

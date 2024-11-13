@@ -16,8 +16,6 @@ const validationSchema = Yup.object({
 });
 
 const PaymentDialog = ({ open, handleClose, onPaymentReceive, bookingData }) => {
-  console.log(`bookingData`, bookingData);
-
   const [remainingAmount, setRemainingAmount] = useState(0);
   const totalAmount = bookingData?.totalPrice || 0;
   const paidAmount = bookingData?.totalPaidAmount ? bookingData?.totalPaidAmount : bookingData?.advancePayment || 0;

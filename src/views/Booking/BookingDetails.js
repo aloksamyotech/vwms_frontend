@@ -9,8 +9,6 @@ import { url } from 'api/url';
 import { allEmployee, editBooking } from 'api/apis';
 
 const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
-  console.log(`bookingData----->`, bookingData);
-
   const [employees, setEmployees] = useState([]);
   const [packages, setPackage] = useState([]);
   const [assigned, setAssigned] = useState('');

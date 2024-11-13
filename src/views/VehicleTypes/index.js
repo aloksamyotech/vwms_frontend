@@ -175,7 +175,6 @@ const Call = () => {
       const response = await allVehicleType(com_url);
       if (response) {
         setAllVehicleData(response.data);
-        console.log(`allVehicleData`, response.data);
       }
     } catch (error) {
       toast.error('Error fetching data');
