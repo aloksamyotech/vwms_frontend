@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { Box, Typography } from '@mui/material';
-import Stripe from "./Stripe"
-import Paypal from "./Paypal"
-import Banktransfer from "./BankTransfer"
-import Cash from "./Cash"
+import Stripe from './Stripe';
+import Paypal from './Paypal';
+import Banktransfer from './BankTransfer';
+import Cash from './Cash';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,16 +54,16 @@ export default function PaymentSetting() {
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          <Stripe/>
+          <Stripe />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <Paypal/>
+          <Paypal />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          <Banktransfer/>
+          <Banktransfer />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={3}>
-          <Cash/>
+          <Cash />
         </CustomTabPanel>
       </Box>
     </>

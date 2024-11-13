@@ -12,7 +12,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
-import { FormLabel, FormControl, Select, MenuItem, FormHelperText } from '@mui/material'; 
+import { FormLabel, FormControl, Select, MenuItem, FormHelperText } from '@mui/material';
 import { url } from 'api/url';
 import { allService, createBooking } from 'api/apis';
 import { useState, useEffect } from 'react';
@@ -20,23 +20,20 @@ import { useState, useEffect } from 'react';
 const AddEmails = (props) => {
   const { open, handleClose, onSuccess } = props;
   const [allServices, setAllService] = useState([]);
-  const [isLoading , setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  
   const validationSchema = yup.object({
     services: yup.string().required('services are required').max(50, 'Enter less than 50 characters'),
     name: yup.string().required('name is required').max(50, 'Enter less than 50 characters'),
     email: yup.string().email('Invalid email format').required('email is required'),
-    phone: yup.string()
+    phone: yup
+      .string()
       .matches(/^[0-9]+$/, 'Phone number must be numeric')
       .required('phone is required')
       .min(10, 'Must be at least 10 digits')
       .max(15, 'Cannot exceed 15 digits'),
-      slot_time: yup.date().required('slot_time is required'), 
-    total: yup.number()
-      .moreThan(0, 'Total must be more than zero')
-      .required('total is required')
-      .max(999999, 'Cannot exceed 6 digits'),
+    slot_time: yup.date().required('slot_time is required'),
+    total: yup.number().moreThan(0, 'Total must be more than zero').required('total is required').max(999999, 'Cannot exceed 6 digits')
   });
 
   const initialValues = {
@@ -53,11 +50,9 @@ const AddEmails = (props) => {
     validationSchema,
     enableReinitialize: true,
     onSubmit: async (values, { resetForm }) => {
-      setIsLoading(true)
+      setIsLoading(true);
       const com_url = `${url.base_url}${url.booking.create}`;
       const response = await createBooking(com_url, values);
-      console.log(`com_url`, com_url);
-      console.log(`response `, response);
 
       if (response) {
         await onSuccess();
@@ -67,7 +62,7 @@ const AddEmails = (props) => {
       } else {
         toast.warning('Not created');
       }
-      setIsLoading(false)
+      setIsLoading(false);
     }
   });
 
@@ -139,7 +134,7 @@ const AddEmails = (props) => {
                     id="phone"
                     name="phone"
                     placeholder="Enter phone"
-                    type="number" 
+                    type="number"
                     size="small"
                     fullWidth
                     value={formik.values.phone}
@@ -167,7 +162,7 @@ const AddEmails = (props) => {
                     <Select
                       labelId="service-select-label"
                       id="services"
-                      name="services" 
+                      name="services"
                       size="small"
                       fullWidth
                       value={formik.values.services}
@@ -180,9 +175,7 @@ const AddEmails = (props) => {
                         </MenuItem>
                       ))}
                     </Select>
-                    <FormHelperText style={{ color: 'error.main' }}>
-                      {formik.touched.services && formik.errors.services}
-                    </FormHelperText>
+                    <FormHelperText style={{ color: 'error.main' }}>{formik.touched.services && formik.errors.services}</FormHelperText>
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6} md={6}>
@@ -204,7 +197,7 @@ const AddEmails = (props) => {
             </DialogContentText>
             <DialogActions>
               <Button type="submit" variant="contained" style={{ textTransform: 'capitalize' }} color="secondary" disabled={isLoading}>
-              {isLoading ? 'Saving...' : 'Save'}
+                {isLoading ? 'Saving...' : 'Save'}
               </Button>
               <Button
                 type="reset"

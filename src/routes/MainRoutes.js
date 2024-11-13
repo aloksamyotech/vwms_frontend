@@ -1,12 +1,10 @@
 import { lazy } from 'react';
 
-// project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import Index from 'views/Settings/WebSetting';
 import PrivateRoutes from './PrivateRoute';
 
-// dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 const LeadManagement = Loadable(lazy(() => import('views/Packages')));
 const ContactManagement = Loadable(lazy(() => import('views/PaymentTransection')));
@@ -27,11 +25,9 @@ const ResetPassword = Loadable(lazy(() => import('views/ResetPassword')));
 const SmtpConfig = Loadable(lazy(() => import('views/Settings/SMTPConfig')));
 const SMSSetting = Loadable(lazy(() => import('views/Settings/SMSSetting')));
 const PaymentSetting = Loadable(lazy(() => import('views/Settings/PaymentSetting')));
-const Employee = Loadable(lazy(()=>import('views/employe')))
-const EmployeeManagement = Loadable(lazy(()=>import('views/employe/EmployeeMangae')))
-const ViewBooking  = Loadable(lazy(()=>import(`views/Booking/view`)))
-
-// ==============================|| MAIN ROUTING ||============================== //
+const Employee = Loadable(lazy(() => import('views/employe')));
+const EmployeeManagement = Loadable(lazy(() => import('views/employe/EmployeeMangae')));
+const ViewBooking = Loadable(lazy(() => import(`views/Booking/view`)));
 
 const MainRoutes = {
   path: '/',
@@ -93,8 +89,8 @@ const MainRoutes = {
               element: <EmailTemplates />
             },
             {
-              path : 'employee',
-              element : <Employee/>
+              path: 'employee',
+              element: <Employee />
             },
             {
               path: 'settings/websetting',
@@ -116,10 +112,10 @@ const MainRoutes = {
               path: 'user/usermanagement',
               element: <UserManagement />
             },
-           {
-            path : 'employee/employeemanagement',
-            element : <EmployeeManagement/>
-           },
+            {
+              path: 'employee/employeemanagement',
+              element: <EmployeeManagement />
+            },
 
             {
               path: 'user/adduser',
@@ -142,8 +138,8 @@ const MainRoutes = {
               element: <PaymentSetting />
             },
             {
-              path : 'booking/view/:id',
-              element : <ViewBooking/>
+              path: 'booking/view/:id',
+              element: <ViewBooking />
             }
           ]
         }

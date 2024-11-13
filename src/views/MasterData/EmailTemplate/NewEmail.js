@@ -21,9 +21,8 @@ import { createTemplate } from 'api/apis';
 import { useState } from 'react';
 
 const AddLead = ({ open, handleClose, onSuccess }) => {
-  const [editorState, setEditorState] = useState('')
-  const [ isLoading , setIsLoading] = useState(false)
-  
+  const [editorState, setEditorState] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object({
     name: yup.string().required('Template Name is required').max(50, 'Enter less than 50 characters'),
@@ -43,7 +42,7 @@ const AddLead = ({ open, handleClose, onSuccess }) => {
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        setIsLoading(true)
+        setIsLoading(true);
         const contentState = editorState.getCurrentContent().getPlainText();
         const templateContent = contentState;
 
@@ -65,7 +64,7 @@ const AddLead = ({ open, handleClose, onSuccess }) => {
       } catch (error) {
         toast.error('An error occurred while creating the template.');
       }
-      setIsLoading(false)
+      setIsLoading(false);
     }
   });
 
@@ -139,7 +138,7 @@ const AddLead = ({ open, handleClose, onSuccess }) => {
           </DialogContentText>
           <DialogActions>
             <Button type="submit" variant="contained" color="primary" disabled={isLoading}>
-            {isLoading ? 'Saving...' : 'Save'}
+              {isLoading ? 'Saving...' : 'Save'}
             </Button>
             <Button
               type="button"

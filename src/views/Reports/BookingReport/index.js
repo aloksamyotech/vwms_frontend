@@ -40,11 +40,18 @@ const Calendar = () => {
         return (
           <Box
             sx={{
+              width: '70px',
+              height: '30px',
               backgroundColor: backgroundColor,
               color: 'white',
-              padding: '6px',
+              padding: '4px',
               borderRadius: '6px',
-              textAlign: 'center'
+              textAlign: 'center',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
             }}
           >
             {params.value}
@@ -125,10 +132,10 @@ const Calendar = () => {
                       }}
                       variant="contained"
                       color="primary"
-                      type="submit" 
+                      type="submit"
                       disabled={loading}
                     >
-                         {loading ? 'Submitting...' : 'Submit'}
+                      {loading ? 'Submitting...' : 'Submit'}
                     </Button>
                   </Grid>
                 </Grid>

@@ -69,13 +69,16 @@ const Call = () => {
       renderCell: (params) => (
         <Box
           sx={{
-            maxWidth: '100px',
             width: '70px',
+            height: '30px',
             backgroundColor: params.value === 'Active' ? '#36d962' : '#ed6868',
             color: 'white',
             padding: '4px',
             borderRadius: '6px',
             textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
             overflow: 'hidden',
             textOverflow: 'ellipsis'
           }}
@@ -92,15 +95,30 @@ const Call = () => {
         <Stack>
           <Button
             variant="contained"
-            style={{ backgroundColor:   '#36d962' }}
-            sx={{ padding: '4px', maxWidth: '100px' }}
+            style={{
+              backgroundColor: '#36d962'
+            }}
+            sx={{
+              width: '70px',
+              height: '30px',
+              color: 'white',
+              padding: '4px',
+              borderRadius: '6px',
+              textAlign: 'center',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
             onClick={() => updateVehicleStatusAPI(params.row._id, params.row.status)}
           >
-            Edit Status
+            Edit
           </Button>
         </Stack>
       )
     },
+
     {
       field: 'action',
       headerName: 'Action',
@@ -157,7 +175,6 @@ const Call = () => {
       const response = await allVehicleType(com_url);
       if (response) {
         setAllVehicleData(response.data);
-        console.log(`allVehicleData`, response.data);
       }
     } catch (error) {
       toast.error('Error fetching data');

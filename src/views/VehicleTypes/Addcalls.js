@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -20,31 +19,28 @@ import { useState } from 'react';
 
 const AddCalls = (props) => {
   const { open, handleClose, onSuccess } = props;
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object({
     vehicleType: yup
       .string()
       .required('Vehicle Type is required')
       .test('len', 'Enter less than 50 characters', (val) => val && val.length < 50),
-    file: yup.mixed().required('Image is required'),
+    file: yup.mixed().required('Image is required')
   });
 
   const initialValues = {
     vehicleType: '',
-    file: '',
+    file: ''
   };
 
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
-      console.log(`values`, values);
-
       const formData = new FormData();
       formData.append('vehicleType', values.vehicleType);
       formData.append('file', values.file);
-      console.log(`formData`, formData);
 
       const com_url = `${url.base_url}${url.vehicle_type.create}`;
 
@@ -66,7 +62,7 @@ const AddCalls = (props) => {
       } finally {
         setIsLoading(false);
       }
-    },
+    }
   });
 
   return (
@@ -76,7 +72,7 @@ const AddCalls = (props) => {
           id="scroll-dialog-title"
           style={{
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'space-between'
           }}
         >
           <Typography variant="h6">Add New</Typography>
@@ -113,7 +109,7 @@ const AddCalls = (props) => {
                     fullWidth
                     type="file"
                     InputLabelProps={{
-                      shrink: true,
+                      shrink: true
                     }}
                     onChange={(event) => {
                       formik.setFieldValue('file', event.currentTarget.files[0]);
@@ -134,7 +130,7 @@ const AddCalls = (props) => {
             onClick={formik.handleSubmit}
             style={{ textTransform: 'capitalize' }}
             color="secondary"
-            disabled={isLoading} 
+            disabled={isLoading}
           >
             {isLoading ? 'Saving...' : 'Save'}
           </Button>

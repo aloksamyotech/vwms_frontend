@@ -1,6 +1,3 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-
-// assets
 import {
   IconHome,
   IconPackage,
@@ -22,7 +19,6 @@ import {
   IconBus
 } from '@tabler/icons';
 
-// constant
 const icons = {
   IconHome,
   IconHistory,
@@ -43,8 +39,6 @@ const icons = {
   IconPhoneCheck,
   IconUsers
 };
-
-// ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
 const dashboard = {
   title: 'Dashboard-Menu',
@@ -193,35 +187,35 @@ const dashboard = {
     //     }
     //   ]
     // },
-      // {
-      //   id: '15',
-      //   title: 'Master Data',
-      //   type: 'collapse',
-      //   icon: icons.IconBrandMastercard,
-      //   children: [
-      //     {
-      //       id: '14',
-      //       title: 'Email Template',
-      //       type: 'item',
-      //       url: '/dashboard/masterdata/emailtemplate',
-      //       breadcrumbs: false
-      //     },
-      //     {
-      //       id: '16',
-      //       title: 'SMS Template',
-      //       type: 'item',
-      //       url: '/dashboard/masterdata/smstemplate',
-      //       breadcrumbs: false
-      //     },
-      //     {
-      //       id: '17',
-      //       title: 'Service Status',
-      //       type: 'item',
-      //       url: '/dashboard/masterdata/servicestatus',
-      //       breadcrumbs: false
-      //     }
-      //   ]
-      // },
+    // {
+    //   id: '15',
+    //   title: 'Master Data',
+    //   type: 'collapse',
+    //   icon: icons.IconBrandMastercard,
+    //   children: [
+    //     {
+    //       id: '14',
+    //       title: 'Email Template',
+    //       type: 'item',
+    //       url: '/dashboard/masterdata/emailtemplate',
+    //       breadcrumbs: false
+    //     },
+    //     {
+    //       id: '16',
+    //       title: 'SMS Template',
+    //       type: 'item',
+    //       url: '/dashboard/masterdata/smstemplate',
+    //       breadcrumbs: false
+    //     },
+    //     {
+    //       id: '17',
+    //       title: 'Service Status',
+    //       type: 'item',
+    //       url: '/dashboard/masterdata/servicestatus',
+    //       breadcrumbs: false
+    //     }
+    //   ]
+    // },
     {
       id: '18',
       title: 'User',
@@ -234,14 +228,14 @@ const dashboard = {
           type: 'item',
           url: '/dashboard/user/usermanagement',
           breadcrumbs: false
-        },
-        {
-          id: '19',
-          title: 'Add User',
-          type: 'item',
-          url: '/dashboard/user/adduser',
-          breadcrumbs: false
         }
+        // {
+        //   id: '19',
+        //   title: 'Add User',
+        //   type: 'item',
+        //   url: '/dashboard/user/adduser',
+        //   breadcrumbs: false
+        // }
       ]
     },
     {
@@ -255,13 +249,6 @@ const dashboard = {
           title: 'Employee ManageMent',
           type: 'item',
           url: '/dashboard/employee/employeemanagement',
-          breadcrumbs: false
-        },
-        {
-          id: '19',
-          title: 'Add Employee',
-          type: 'item',
-          url: '/dashboard/employee',
           breadcrumbs: false
         }
       ]

@@ -69,7 +69,7 @@ const Meeting = () => {
     //         textAlign: 'center'
     //       }}
     //     >
-    //       {params.value}  
+    //       {params.value}
     //     </Box>
     //   ),
     //   cellClassName: 'name-column--cell--capitalize'
@@ -166,7 +166,6 @@ const Meeting = () => {
   const handleEditOpen = (row) => {
     setOpenEdit(true);
     setSelectedRow(row);
-    console.log(selectedRow);
   };
   const handleOpenAdd = () => setOpenAdd(true);
   const handleCloseAdd = () => setOpenAdd(false);

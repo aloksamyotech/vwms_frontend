@@ -76,13 +76,16 @@ const Lead = () => {
       renderCell: (params) => (
         <Box
           sx={{
-            maxWidth: '100px',
             width: '70px',
+            height: '30px',
             backgroundColor: params.value === 'Active' ? '#36d962' : '#ed6868',
             color: 'white',
             padding: '4px',
             borderRadius: '6px',
             textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
             overflow: 'hidden',
             textOverflow: 'ellipsis'
           }}
@@ -142,7 +145,6 @@ const Lead = () => {
       try {
         const id = selectedRow._id;
         const com_url = `${url.base_url}${url.package.delete}${id}`;
-        console.log(com_url);
 
         const response = await deletePackage(com_url);
 

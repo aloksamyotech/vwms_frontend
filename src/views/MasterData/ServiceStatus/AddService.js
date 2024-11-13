@@ -1,8 +1,7 @@
-
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import {  FormLabel, Grid,  TextField } from '@mui/material';
+import { FormLabel, Grid, TextField } from '@mui/material';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
@@ -16,24 +15,23 @@ import { useState } from 'react';
 
 const AddLead = (props) => {
   const { open, handleClose } = props;
-  const [isLoading , setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  
   const validationSchema = yup.object({
-    serviceName: yup.string().required('required').test('len', 'enter less then 50 char', val =>val && val.length < 50)
-    });
+    serviceName: yup
+      .string()
+      .required('required')
+      .test('len', 'enter less then 50 char', (val) => val && val.length < 50)
+  });
 
-  
   const initialValues = {
     serviceName: ''
-    }
+  };
 
-  
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      console.log(values);
       handleClose();
       toast.success('Lead added successfully');
     }
@@ -46,15 +44,15 @@ const AddLead = (props) => {
         onClose={handleClose}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
-        maxWidth="md" 
-        fullWidth 
+        maxWidth="md"
+        fullWidth
       >
         <DialogTitle
           id="scroll-dialog-title"
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            padding: '24px' 
+            padding: '24px'
           }}
         >
           <Typography variant="h3">Add Status</Typography>
@@ -88,8 +86,15 @@ const AddLead = (props) => {
           </form>
         </DialogContent>
         <DialogActions style={{ padding: '16px 24px' }}>
-          <Button onClick={formik.handleSubmit} variant="contained" color="primary" type="submit" style={{ padding: '10px 20px' }} disabled={isLoading}>
-          {isLoading ? 'Saving...' : 'Save'}
+          <Button
+            onClick={formik.handleSubmit}
+            variant="contained"
+            color="primary"
+            type="submit"
+            style={{ padding: '10px 20px' }}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Saving...' : 'Save'}
           </Button>
           <Button
             onClick={() => {

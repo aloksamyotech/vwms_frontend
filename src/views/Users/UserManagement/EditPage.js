@@ -136,7 +136,7 @@ const AddUser = ({ open, handleClose, EditData, onSuccess }) => {
                         </Grid>
                       </Grid>
 
-                      <DialogActions >
+                      <DialogActions>
                         <Button
                           type="submit"
                           variant="contained"

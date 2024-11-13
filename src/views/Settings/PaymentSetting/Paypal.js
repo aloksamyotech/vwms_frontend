@@ -23,9 +23,7 @@ const SmtpConfig = () => {
           ReplyTo: ''
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={(values) => {}}
       >
         {({ values, handleChange, errors, touched }) => (
           <Form>

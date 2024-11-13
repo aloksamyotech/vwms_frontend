@@ -32,32 +32,29 @@ const SmtpConfig = () => {
             <Card>
               <Box width="100%" padding="30px" paddingLeft="100px" marginTop="40px">
                 <Grid container spacing={6}>
-              
-              <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 5, md: 6 }}>
-                <Grid item xs={12}>
-                  <FormLabel>Service Name</FormLabel>
-                  <TextField
-                    id="serviceName"
-                    name="serviceName"
-                    size="medium"
-                    placeholder="Enter vehicle title"
-                    maxRows={10}
-                    fullWidth
-                    // value={formik.values.serviceName}
-                    // onChange={formik.handleChange}
-                    // error={formik.touched.serviceName && Boolean(formik.errors.serviceName)}
-                    // helperText={formik.touched.serviceName && formik.errors.serviceName}
-                    // style={{ marginBottom: '20px' }}
-                  />
-                </Grid>
-              </Grid>
-                 
-                 
-                  <Grid container  style={{marginTop:'10px'}}>
+                  <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 5, md: 6 }}>
+                    <Grid item xs={12}>
+                      <FormLabel>Service Name</FormLabel>
+                      <TextField
+                        id="serviceName"
+                        name="serviceName"
+                        size="medium"
+                        placeholder="Enter vehicle title"
+                        maxRows={10}
+                        fullWidth
+                        // value={formik.values.serviceName}
+                        // onChange={formik.handleChange}
+                        // error={formik.touched.serviceName && Boolean(formik.errors.serviceName)}
+                        // helperText={formik.touched.serviceName && formik.errors.serviceName}
+                        // style={{ marginBottom: '20px' }}
+                      />
+                    </Grid>
+                  </Grid>
+
+                  <Grid container style={{ marginTop: '10px' }}>
                     <Button variant="contained" color="primary" type="submit">
-                   Update Settings
+                      Update Settings
                     </Button>
-                   
                   </Grid>
                 </Grid>
               </Box>

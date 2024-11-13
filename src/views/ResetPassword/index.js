@@ -20,9 +20,7 @@ const ResetPassword = () => {
           password: ''
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={(values) => {}}
       >
         {({ values, handleChange, errors, touched }) => (
           <Form>
@@ -59,8 +57,7 @@ const ResetPassword = () => {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <Button variant="contained" onClick={console.log(values)
-                    } color="primary" type="submit">
+                    <Button variant="contained" color="primary" type="submit">
                       Update
                     </Button>
                   </Grid>

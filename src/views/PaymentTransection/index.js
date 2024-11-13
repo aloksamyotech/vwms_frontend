@@ -17,7 +17,7 @@ const leadData = [
     name: 'Doe',
     amount: 'male',
     txnID: '9981923587',
-    status: 'success',
+    status: 'Success',
     emailAddress: 'ap@samyotech.com',
     date: 'Edit'
   }
@@ -54,11 +54,18 @@ const Contact = () => {
       renderCell: (params) => (
         <Box
           sx={{
-            backgroundColor: params.value == 'success' ? '#36d962' : '#ed6868',
+            width: '70px',
+            height: '30px',
+            backgroundColor: params.value === 'Success' ? '#36d962' : '#ed6868',
             color: 'white',
-            padding: '6px',
+            padding: '4px',
             borderRadius: '6px',
-            textAlign: 'center'
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
           }}
         >
           {params.value}

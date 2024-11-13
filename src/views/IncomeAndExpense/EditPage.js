@@ -16,7 +16,7 @@ import { createInAndEx, editInAndEx } from 'api/apis';
 import { useState } from 'react';
 
 const AddTask = ({ open, handleClose, EditData, onSuccess }) => {
-  const [isLoading,setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const validationSchema = yup.object({
     description: yup
       .string()
@@ -37,7 +37,7 @@ const AddTask = ({ open, handleClose, EditData, onSuccess }) => {
     validationSchema,
     enableReinitialize: true,
     onSubmit: async (values, { resetForm }) => {
-      setIsLoading(true)
+      setIsLoading(true);
       const id = EditData?._id;
       const com_url = `${url.base_url}${url.inAndEx.edit}${id}`;
       const response = await editInAndEx(com_url, values);
@@ -49,7 +49,7 @@ const AddTask = ({ open, handleClose, EditData, onSuccess }) => {
       } else {
         toast.warning('Edit Updated');
       }
-      setIsLoading(false)
+      setIsLoading(false);
     }
   });
 
@@ -137,7 +137,7 @@ const AddTask = ({ open, handleClose, EditData, onSuccess }) => {
 
         <DialogActions>
           <Button type="submit" variant="contained" onClick={formik.handleSubmit} color="secondary" disabled={isLoading}>
-          {isLoading ? 'Updating...' : 'Update'}
+            {isLoading ? 'Updating...' : 'Update'}
           </Button>
           <Button
             variant="outlined"

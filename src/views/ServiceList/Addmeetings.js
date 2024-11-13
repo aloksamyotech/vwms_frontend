@@ -157,7 +157,7 @@ const AddMeetings = (props) => {
             </DialogContentText>
             <DialogActions>
               <Button type="submit" variant="contained" style={{ textTransform: 'capitalize' }} color="secondary" disabled={isLoading}>
-              {isLoading ? 'Saving...' : 'Save'}
+                {isLoading ? 'Saving...' : 'Save'}
               </Button>
               <Button
                 type="button"
