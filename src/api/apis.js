@@ -93,6 +93,10 @@ export const createPackage = async (com_url, payload) => {
   const response = await createApi(com_url, payload);
   return response;
 };
+export const createUser = async (com_url, payload) => {
+  const response = await createApi(com_url, payload);
+  return response;
+};
 export const createBooking = async (com_url, payload) => {
   const response = await createApi(com_url, payload);
   return response;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Grid,
   TextField,
@@ -20,7 +20,8 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
-import { useState } from 'react';
+import { url } from 'api/url';
+import { createUser } from 'api/apis';
 
 const validationSchema = Yup.object({
   name: Yup.string()
@@ -40,6 +41,7 @@ const validationSchema = Yup.object({
 const AddUser = ({ open, handleClose, onSuccess }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
       <DialogTitle>Add User</DialogTitle>
@@ -49,45 +51,44 @@ const AddUser = ({ open, handleClose, onSuccess }) => {
             name: '',
             email: '',
             password: '',
-            role: 'other',
-            permissions: [
-              {
-                vehicleType: false,
-                serviceList: false,
-                packages: false,
-                bookings: false,
-                paymentTransaction: false,
-                outOfService: false,
-                incomeExpense: false,
-                users: false,
-                reports: false,
-                settings: false,
-                integration: false
-              }
-            ]
+            role: 'employee',
+            permissions: {
+              vehicleType: false,
+              serviceList: false,
+              packages: false,
+              bookings: false,
+              paymentTransaction: false,
+              outOfService: false,
+              incomeExpense: false,
+              users: false,
+              reports: false
+            }
           }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
+          onSubmit={async (values) => {
             setIsLoading(true);
 
-            axios
-              .post('http://localhost:8080/user/create', values)
-              .then((res) => {
-                if (res?.data?.message == 'Already Exist') {
-                  toast.warning(res?.data?.message || 'Already Exist');
-                } else {
-                  toast.success(res?.data?.message || 'user successfully created');
-                  onSuccess();
-                  handleClose();
-                }
-              })
-              .catch((err) => {
-                console.error(`error: ${err}`);
-              });
-            setIsLoading(false);
+            try {
+              const com_url = `${url.base_url}${url.user.create_user}`;
+
+              const response = await createUser(com_url, values);
+
+              if (response?.data?.message === 'Already Exist') {
+                toast.warning(response?.data?.message || 'User already exists');
+              } else {
+                toast.success(response?.data?.message || 'User successfully created');
+                onSuccess();
+                handleClose();
+              }
+            } catch (error) {
+              toast.error('An error occurred. Please try again later.');
+              console.error('Error:', error);
+            } finally {
+              setIsLoading(false);
+            }
           }}
         >
-          {({ values, handleChange, errors, touched }) => (
+          {({ values, handleChange, errors, touched, setFieldValue }) => (
             <Form>
               <Card style={{ paddingTop: '15px' }}>
                 <Box width="100%" padding="30px">
@@ -132,13 +133,7 @@ const AddUser = ({ open, handleClose, onSuccess }) => {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <FormLabel>Role</FormLabel>
-                      <FormControl fullWidth size="small">
-                        <Field name="role" as={Select} defaultValue="other" error={touched.role && !!errors.role}>
-                          <MenuItem value="admin">Admin</MenuItem>
-                          <MenuItem value="user">User</MenuItem>
-                          <MenuItem value="other">Other</MenuItem>
-                        </Field>
-                      </FormControl>
+                      <Field name="role" as={TextField} value="employee" disabled fullWidth size="small" />
                     </Grid>
 
                     <Grid item xs={12}>
@@ -155,9 +150,7 @@ const AddUser = ({ open, handleClose, onSuccess }) => {
                           { label: 'Out of Service', name: 'outOfService' },
                           { label: 'Income & Expense', name: 'incomeExpense' },
                           { label: 'Users', name: 'users' },
-                          { label: 'Reports', name: 'reports' },
-                          { label: 'Settings', name: 'settings' },
-                          { label: 'Integration', name: 'integration' }
+                          { label: 'Reports', name: 'reports' }
                         ].map((permission) => (
                           <Grid item xs={6} sm={4} key={permission.name}>
                             <FormControlLabel
@@ -165,7 +158,7 @@ const AddUser = ({ open, handleClose, onSuccess }) => {
                                 <Checkbox
                                   name={`permissions.${permission.name}`}
                                   checked={values.permissions[permission.name]}
-                                  onChange={handleChange}
+                                  onChange={() => setFieldValue(`permissions.${permission.name}`, !values.permissions[permission.name])}
                                 />
                               }
                               label={permission.label}

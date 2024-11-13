@@ -33,7 +33,7 @@ const AddLead = (props) => {
       .required('Service is required')
       .test('len', 'Enter less than 500 characters', (val) => val && val.length < 500),
     price: yup.number().moreThan(0, 'Not less than zero').max(999999, 'Cannot exceed 6 digits').required('Total is required'),
-    hours: yup.number().required('Hours are required').min(0, 'Hours cannot be negative'),
+    hours: yup.number().required('Hours are required').min(0, 'Hours cannot be negative').max(23, 'Hours must be less than 24'),
     minutes: yup.number().required('Minutes are required').min(0).max(59, 'Minutes must be less than 60')
   });
 

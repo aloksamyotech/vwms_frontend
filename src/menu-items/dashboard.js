@@ -120,7 +120,7 @@ const dashboard = {
       breadcrumbs: false
     },
     {
-      id: '04',
+      id: '19',
       title: 'Income and Expense',
       type: 'item',
       url: '/dashboard/task',
@@ -150,6 +150,22 @@ const dashboard = {
           breadcrumbs: false
         }
       ]
+    },
+    {
+      id: '29',
+      title: 'User',
+      type: 'item',
+      url: '/dashboard/user/usermanagement',
+      icon: icons.IconUsers,
+      breadcrumbs: false
+    },
+    {
+      id: '23',
+      title: 'Employee',
+      type: 'item',
+      url: '/dashboard/employee/employeemanagement',
+      icon: icons.IconUsers,
+      breadcrumbs: false
     },
     // {
     //   id: '13',
@@ -216,45 +232,46 @@ const dashboard = {
     //     }
     //   ]
     // },
+    // {
+    //   id: '18',
+    //   title: 'User',
+    //   type: 'collapse',
+    //   icon: icons.IconUsers,
+    //      url: '/dashboard/user/usermanagement',
+    // children: [
+    //   {
+    //     id: '19',
+    //     title: 'User ManageMent',
+    //     type: 'item',
+    //     url: '/dashboard/user/usermanagement',
+    //     breadcrumbs: false
+    //   }
+    //   // {
+    //   //   id: '19',
+    //   //   title: 'Add User',
+    //   //   type: 'item',
+    //   //   url: '/dashboard/user/adduser',
+    //   //   breadcrumbs: false
+    //   // }
+    // ]
+    // },
+    // {
+    //   id: '19',
+    //   title: 'Employee',
+    //   type: 'collapse',
+    //   icon: icons.IconUsers,
+    //   children: [
+    //     {
+    //       id: '19',
+    //       title: 'Employee ManageMent',
+    //       type: 'item',
+    //       url: '/dashboard/employee/employeemanagement',
+    //       breadcrumbs: false
+    //     }
+    //   ]
+    // },
     {
-      id: '18',
-      title: 'User',
-      type: 'collapse',
-      icon: icons.IconUsers,
-      children: [
-        {
-          id: '19',
-          title: 'User ManageMent',
-          type: 'item',
-          url: '/dashboard/user/usermanagement',
-          breadcrumbs: false
-        }
-        // {
-        //   id: '19',
-        //   title: 'Add User',
-        //   type: 'item',
-        //   url: '/dashboard/user/adduser',
-        //   breadcrumbs: false
-        // }
-      ]
-    },
-    {
-      id: '19',
-      title: 'Employee',
-      type: 'collapse',
-      icon: icons.IconUsers,
-      children: [
-        {
-          id: '19',
-          title: 'Employee ManageMent',
-          type: 'item',
-          url: '/dashboard/employee/employeemanagement',
-          breadcrumbs: false
-        }
-      ]
-    },
-    {
-      id: '20',
+      id: '25',
       title: 'Reset Password',
       type: 'item',
       url: '/dashboard/resetpassword',
