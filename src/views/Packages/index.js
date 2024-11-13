@@ -75,17 +75,20 @@ const Lead = () => {
       flex: 1,
       renderCell: (params) => (
         <Box
-          sx={{
-            maxWidth: '100px',
-            width: '70px',
-            backgroundColor: params.value === 'Active' ? '#36d962' : '#ed6868',
-            color: 'white',
-            padding: '4px',
-            borderRadius: '6px',
-            textAlign: 'center',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis'
-          }}
+        sx={{
+          width: '70px',
+          height: '30px',
+          backgroundColor: params.value === 'Active' ? '#36d962' : '#ed6868',
+          color: 'white',
+          padding: '4px',
+          borderRadius: '6px',
+          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis'
+        }}
         >
           {params.value}
         </Box>

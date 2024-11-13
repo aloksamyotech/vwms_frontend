@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Typography, Grid, Card, CardContent } from '@mui/material';
-import { toast } from 'react-toastify';
 import PaymentDialog from '../PaymentDialog';
 import { useLocation } from 'react-router-dom';
 import jsPDF from 'jspdf';
@@ -12,8 +11,6 @@ const BookingDetails = () => {
   const { bookingData } = location.state || {};
 
   const [paymentDialogOpen, setPaymentDialogOpen] = useState(false);
-
-  
 
   const handleReceivePayment = () => {
     setPaymentDialogOpen(false);

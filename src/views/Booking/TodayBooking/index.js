@@ -16,7 +16,7 @@ import { IconEdit } from '@tabler/icons'; //
 const Documents = () => {
   const [openAdd, setOpenAdd] = useState(false);
   const [openView, setOpenView] = useState(false);
-  const [selectedRow, setSelectedRow] = useState(null);
+
   const [bookingData, setBookingData] = useState([]);
   const [showData, setShowData] = useState([]);
   const [showBookingData, setShowBookingData] = useState([]);
@@ -50,11 +50,18 @@ const Documents = () => {
       renderCell: (params) => (
         <Box
           sx={{
+            width: '70px',
+            height: '30px',
             backgroundColor: params.value === 'Success' ? '#36d962' : '#ed6868',
             color: 'white',
-            padding: '6px',
+            padding: '4px',
             borderRadius: '6px',
-            textAlign: 'center'
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
           }}
         >
           {params.value}
@@ -78,12 +85,18 @@ const Documents = () => {
         return (
           <Box
             sx={{
+              width: '70px',
+              height: '30px',
               backgroundColor: backgroundColor,
               color: 'white',
-              padding: '6px',
+              padding: '4px',
               borderRadius: '6px',
               textAlign: 'center',
-              maxWidth: '100px'
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
             }}
           >
             {params.value}
@@ -126,14 +139,12 @@ const Documents = () => {
   const handleOpenBooking = (row) => {
     setShowBookingData(row);
 
-    console.log(`showBookingData----`, showBookingData);
-
     setShowBooking(true);
   };
   const handleCloseBooking = () => {
     setShowBooking(false);
   };
-  const handleCloseView = () => setOpenView(false);
+
   const handleOpenAdd = () => setOpenAdd(true);
   const handleCloseAdd = () => setOpenAdd(false);
 
@@ -142,8 +153,6 @@ const Documents = () => {
     try {
       const response = await todayBooking(com_url);
       const data = response.data;
-
-      console.log(`data`, data);
 
       const rowData = data?.map((item, index) => ({
         id: item?.bookingId,
@@ -169,7 +178,8 @@ const Documents = () => {
         totalPaidAmount: item?.payments?.[0]?.totalPaidAmount,
         customerPhone: item?.type?.[0]?.phone,
         employeeFirstName: item?.employee?.[0]?.firstName,
-        employeeLastName: item?.employee?.[0]?.lastName
+        employeeLastName: item?.employee?.[0]?.lastName,
+        employeeId: item?.employee?.[0]?._id
       }));
       setShowData(rowData);
       setBookingData(rowData);

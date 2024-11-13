@@ -1,24 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Stack,
-  Button,
-  Container,
-  Typography,
-  Box,
-  Card,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField
-} from '@mui/material';
+import { Stack, Button, Container, Typography, Box, Card } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { IconEdit } from '@tabler/icons';
 import TableStyle from '../../../ui-component/TableStyle';
+import Iconify from '../../../ui-component/iconify';
 import { url } from 'api/url';
 import { allUser } from 'api/apis';
 import { toast } from 'react-toastify';
 import EditPage from './EditPage';
+import OpenAddUser from '../AddUser/index.js';
 
 const UserManagement = () => {
   const [openAdd, setOpenAdd] = useState(false);
@@ -52,11 +42,18 @@ const UserManagement = () => {
       renderCell: (params) => (
         <Box
           sx={{
-            backgroundColor: params.value === 'Active' ? '#36d962' : '#de5757',
+            width: '70px',
+            height: '30px',
+            backgroundColor: params.value === 'Active' ? '#36d962' : '#ed6868',
             color: 'white',
-            padding: '6px',
+            padding: '4px',
             borderRadius: '6px',
-            textAlign: 'center'
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
           }}
         >
           {params.value}
@@ -85,18 +82,16 @@ const UserManagement = () => {
 
   const handleOpenEdit = (user) => {
     setSelectedUser(user);
-    setOpenEdit(true)
+    setOpenEdit(true);
   };
 
+  const handleOpenAdd = () => setOpenAdd(true);
   const handleCloseEdit = () => {
     setOpenEdit(false);
     setSelectedUser(null);
   };
 
-  const handleEditUser = async () => {
-    toast.success('User updated successfully');
-    handleCloseEdit();
-  };
+  const handleCloseAdd = () => setOpenAdd(false);
 
   const fetchData = async () => {
     const com_url = `${url.base_url}${url.user.all_user}`;
@@ -110,18 +105,22 @@ const UserManagement = () => {
     }
   };
   useEffect(() => {
-   
-
     fetchData();
   }, []);
 
   return (
     <>
       <EditPage EditData={selectedUser} open={openEdit} handleClose={handleCloseEdit} onSuccess={fetchData} />
-      
+      <OpenAddUser open={openAdd} handleClose={handleCloseAdd} onSuccess={fetchData} />
+
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
           <Typography variant="h3">User List</Typography>
+          <Stack direction="row" alignItems="center" justifyContent={'flex-end'} spacing={2}>
+            <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAdd}>
+              Add New
+            </Button>
+          </Stack>
         </Stack>
         <TableStyle>
           <Box width="100%">
@@ -137,8 +136,6 @@ const UserManagement = () => {
             </Card>
           </Box>
         </TableStyle>
-
-     
       </Container>
     </>
   );

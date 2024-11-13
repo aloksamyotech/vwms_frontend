@@ -9,6 +9,8 @@ import { url } from 'api/url';
 import { allEmployee, editBooking } from 'api/apis';
 
 const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
+  console.log(`bookingData----->`, bookingData);
+
   const [employees, setEmployees] = useState([]);
   const [packages, setPackage] = useState([]);
   const [assigned, setAssigned] = useState('');
@@ -50,10 +52,12 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
     fetchPackage();
   }, []);
 
+  const filteredEmployees = employees.filter((employee) => !(employee._id === bookingData?.employeeId));
+
   const formik = useFormik({
     initialValues: {
       status: bookingData?.serviceStatus || '',
-      assignedTo: bookingData?.employeeFirstName ? bookingData?.employeeFirstName : ''
+      assignedTo: bookingData?.employeeId || ''
     },
 
     validationSchema,
@@ -67,11 +71,17 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
       };
       setAssigned(values.assignedTo);
       const com_url = `${url.base_url}${url.booking.edit}${id}`;
+
       try {
         const response = await editBooking(com_url, data);
-        if (response) {
+
+        if (response.data.errorCode == 400) {
+          toast.error('Slot not available');
+        } else if (response.data.errorCode == 500) {
+          toast.error('Update failed, server error');
+        } else if (response.status == 200) {
           await onSuccess();
-          toast.success('Successfully Updated');
+          toast.success('Successfully Assigned');
           resetForm();
           handleClose();
         } else {
@@ -82,7 +92,7 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
       }
     }
   });
-  const filteredEmployees = employees;
+
   return (
     <Dialog open={open} onClose={handleClose} aria-labelledby="booking-details-dialog-title">
       <DialogTitle

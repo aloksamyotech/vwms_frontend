@@ -7,7 +7,6 @@ import * as Yup from 'yup';
 import { url } from 'api/url';
 import { editPayments } from 'api/apis';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 
 const validationSchema = Yup.object({
   payAmount: Yup.number()
@@ -57,6 +56,7 @@ const PaymentDialog = ({ open, handleClose, onPaymentReceive, bookingData }) => 
       <DialogContent>
         <Formik
           initialValues={{
+            advancePayment: bookingData.advancePayment,
             paidAmount: paidAmount,
             totalAmount: totalAmount,
             remainingAmount: remainingAmount,
@@ -79,6 +79,16 @@ const PaymentDialog = ({ open, handleClose, onPaymentReceive, bookingData }) => 
                   component={TextField}
                 />
 
+                <Field
+                  name="advancePayment"
+                  label="Advance Amount"
+                  variant="outlined"
+                  fullWidth
+                  margin="normal"
+                  value={values.advancePayment}
+                  disabled
+                  component={TextField}
+                />
                 <Field
                   name="paidAmount"
                   label="Paid Amount"
@@ -103,7 +113,7 @@ const PaymentDialog = ({ open, handleClose, onPaymentReceive, bookingData }) => 
 
                 <Field
                   name="payAmount"
-                  label="Pay Amount"
+                  label="Collect Amount"
                   variant="outlined"
                   placeholder="0"
                   fullWidth

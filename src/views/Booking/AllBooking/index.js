@@ -15,8 +15,7 @@ import { IconEdit } from '@tabler/icons'; //
 
 const Documents = () => {
   const [openAdd, setOpenAdd] = useState(false);
-  const [openView, setOpenView] = useState(false);
-  const [selectedRow, setSelectedRow] = useState(null);
+  
   const [bookingData, setBookingData] = useState([]);
   const [showData, setShowData] = useState([]);
   const [showBookingData, setShowBookingData] = useState([]);
@@ -43,12 +42,6 @@ const Documents = () => {
       flex: 0.7,
       valueFormatter: (params) => moment(params.value).format('MM:DD:YYYY')
     },
-    // {
-    //   field: 'time',
-    //   headerName: 'Time',
-    //   flex: 0.7,
-    //   valueFormatter: (params) => moment(params.value).format('HH:mm')
-    // },
     {
       field: 'paymentStatus',
       headerName: 'Payment Status',
@@ -56,11 +49,18 @@ const Documents = () => {
       renderCell: (params) => (
         <Box
           sx={{
+            width: '70px',
+            height: '30px',
             backgroundColor: params.value === 'Success' ? '#36d962' : '#ed6868',
             color: 'white',
-            padding: '6px',
+            padding: '4px',
             borderRadius: '6px',
-            textAlign: 'center'
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
           }}
         >
           {params.value}
@@ -84,11 +84,18 @@ const Documents = () => {
         return (
           <Box
             sx={{
+              width: '70px',
+              height: '30px',
               backgroundColor: backgroundColor,
               color: 'white',
-              padding: '6px',
+              padding: '4px',
               borderRadius: '6px',
-              textAlign: 'center'
+              textAlign: 'center',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
             }}
           >
             {params.value}
@@ -130,15 +137,12 @@ const Documents = () => {
 
   const handleOpenBooking = (row) => {
     setShowBookingData(row);
-
-    console.log(`showBookingData----`, showBookingData);
-
     setShowBooking(true);
   };
   const handleCloseBooking = () => {
     setShowBooking(false);
   };
-  const handleCloseView = () => setOpenView(false);
+
   const handleOpenAdd = () => setOpenAdd(true);
   const handleCloseAdd = () => setOpenAdd(false);
 
@@ -147,8 +151,6 @@ const Documents = () => {
     try {
       const response = await todayBooking(com_url);
       const data = response.data;
-
-      console.log(`data`, data);
 
       const rowData = data?.map((item, index) => ({
         id: item?.bookingId,
@@ -197,7 +199,7 @@ const Documents = () => {
       <BookingDetails open={showBooking} bookingData={showBookingData} handleClose={handleCloseBooking} onSuccess={fetchData} />
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent="space-between">
-          <Typography variant="h3">Today Booking</Typography>
+          <Typography variant="h3">All Booking</Typography>
           <Stack direction="row" alignItems="center" justifyContent="flex-end" spacing={2}>
             <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAdd} aria-label="Add New Booking">
               Add New

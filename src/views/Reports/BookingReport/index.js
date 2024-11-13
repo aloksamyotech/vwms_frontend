@@ -39,13 +39,20 @@ const Calendar = () => {
 
         return (
           <Box
-            sx={{
-              backgroundColor: backgroundColor,
-              color: 'white',
-              padding: '6px',
-              borderRadius: '6px',
-              textAlign: 'center'
-            }}
+          sx={{
+            width: '70px',
+            height: '30px',
+            backgroundColor: backgroundColor,
+            color: 'white',
+            padding: '4px',
+            borderRadius: '6px',
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
+          }}
           >
             {params.value}
           </Box>
@@ -117,6 +124,7 @@ const Calendar = () => {
                     <FormLabel></FormLabel>
                     <Button
                       style={{
+                        
                         maxWidth: '200px',
                         maxHeight: '40px',
                         minWidth: '100px',
