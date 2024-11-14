@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-// material-ui
 import { useTheme } from '@mui/material/styles';
 import {
   Box,
@@ -21,35 +20,19 @@ import {
   Typography,
   useMediaQuery
 } from '@mui/material';
-
-// third party
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-
-// project imports
 import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'ui-component/extended/AnimateButton';
-
-// assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
-import Google from 'assets/images/icons/social-google.svg';
-import { useNavigate } from 'react-router';
-
-// ============================|| FIREBASE - LOGIN ||============================ //
+import { url } from 'api/url';
+import { loggedUser } from 'api/apis';
 
 const FirebaseLogin = ({ ...others }) => {
   const theme = useTheme();
-  const scriptedRef = useScriptRef();
-  const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-  const customization = useSelector((state) => state.customization);
-  const [checked, setChecked] = useState(true);
-  const navigate = useNavigate();
 
-  const googleHandler = async () => {
-    console.error('Login');
-  };
+  const [checked, setChecked] = useState(true);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
@@ -71,31 +54,29 @@ const FirebaseLogin = ({ ...others }) => {
           email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
           password: Yup.string().max(255).required('Password is required')
         })}
-        onSubmit={(values, { resetForm }) => {
-          // console.log(values);
-          axios
-            .post('http://localhost:8080/user/login', values)
-            .then((res) => {
-              console.log(`res--------------->`, res);
+        onSubmit={async (values, { resetForm }) => {
+          const com_url = `${url.base_url}${url.login.login}`;
 
-              if (res?.data?.message == 'User Not Registered') {
-                toast.error(`${res?.data?.message}`);
-                resetForm();
-              } else if (res?.data?.message == 'Wrong Password') {
-                toast.warning(`${res?.data?.message}`);
-              } else {
-                toast.success(`${res?.data?.message || `Login Successfully`}`);
-                const token = res.data.token;
-                localStorage.setItem('token', token);
-                setTimeout(() => {
-                  navigate('/dashboard/default');
-                }, 1000);
-              }
-            })
-            .catch((err) => {
-              console.error(`error: ${err}`);
-              toast.error(err.response?.data?.message || '500 Error Not Registered');
-            });
+          try {
+            const res = await loggedUser(com_url, values);
+
+            if (res?.data?.message === 'User Not Registered') {
+              toast.error(res?.data?.message);
+              resetForm();
+            } else if (res?.data?.message === 'Wrong Password') {
+              toast.warning(res?.data?.message);
+            } else {
+              toast.success(res?.data?.message || 'Login Successful');
+              const token = res.data.token;
+              localStorage.setItem('token', token);
+              setTimeout(() => {
+                window.location.replace('/dashboard/default');
+              }, 1000);
+            }
+          } catch (err) {
+            console.error(`error: ${err}`);
+            toast.error(err?.response?.data?.message || '500 Error: Something went wrong');
+          }
         }}
       >
         {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
@@ -24,17 +23,39 @@ const AddLead = (props) => {
 
   const validationSchema = yup.object({
     type: yup.string().required('Vehicle Type is required'),
+
     name: yup
       .string()
       .required('Package Name is required')
-      .test('len', 'Enter less than 50 characters', (val) => val && val.length < 50),
+      .test('len', 'Enter less than 50 characters', (val) => val && val.length < 50)
+      .matches(/^[a-zA-Z0-9\s]*$/, 'Package Name cannot contain special characters'),
+
     desc: yup
       .string()
       .required('Service is required')
-      .test('len', 'Enter less than 500 characters', (val) => val && val.length < 500),
-    price: yup.number().moreThan(0, 'Not less than zero').max(999999, 'Cannot exceed 6 digits').required('Total is required'),
-    hours: yup.number().required('Hours are required').min(0, 'Hours cannot be negative').max(23, 'Hours must be less than 24'),
-    minutes: yup.number().required('Minutes are required').min(0).max(59, 'Minutes must be less than 60')
+      .test('len', 'Enter less than 500 characters', (val) => val && val.length < 500)
+      .matches(/^[a-zA-Z0-9\s]*$/, 'Service description cannot contain special characters'),
+
+    price: yup
+      .number()
+      .required('Total is required')
+      .moreThan(0, 'Should be Positive Value')
+      .max(999999, 'Cannot exceed 6 digits')
+      .test('positive', 'Price cannot be less than zero', (value) => value >= 0),
+
+    hours: yup
+      .number()
+      .required('Hours are required')
+      .min(0, 'Hours cannot be negative')
+      .max(23, 'Hours must be less than 24')
+      .test('non-negative', 'Hours cannot be negative', (value) => value >= 0),
+
+    minutes: yup
+      .number()
+      .required('Minutes are required')
+      .min(0, 'Minutes cannot be negative')
+      .max(59, 'Minutes must be less than 60')
+      .test('non-negative', 'Minutes cannot be negative', (value) => value >= 0)
   });
 
   const initialValues = {

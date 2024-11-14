@@ -238,10 +238,10 @@ const Lead = () => {
             <DialogContentText>Are you sure you want to delete</DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseConfirm} color="primary">
+            <Button onClick={handleCloseConfirm} color="error" variant="outlined">
               No
             </Button>
-            <Button onClick={handleConfirmDelete} color="secondary" variant="contained">
+            <Button onClick={handleConfirmDelete} variant="contained">
               Yes
             </Button>
           </DialogActions>

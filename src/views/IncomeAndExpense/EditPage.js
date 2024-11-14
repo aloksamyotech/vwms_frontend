@@ -53,11 +53,13 @@ const AddTask = ({ open, handleClose, EditData, onSuccess }) => {
     }
   });
 
+  
+  
   return (
     <div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="scroll-dialog-title" aria-describedby="scroll-dialog-description">
         <DialogTitle id="scroll-dialog-title" style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography variant="h6">Edit Task</Typography>
+          <Typography variant="h6">Edit</Typography>
           <ClearIcon onClick={handleClose} style={{ cursor: 'pointer' }} />
         </DialogTitle>
 

@@ -18,10 +18,11 @@ const Calendar = () => {
     {
       field: 'createdAt',
       headerName: 'Booking Date',
-      flex: 0.5,
+      flex: 0.7,
       valueFormatter: ({ value }) => moment(value).format('MM/DD/YYYY')
     },
     { field: '_id', headerName: 'Booking ID', flex: 1 },
+    { field: 'assignedTo', headerName: 'Assigned To', flex: 1 },
     { field: 'customerName', headerName: 'Customer Name', flex: 1 },
     {
       field: 'serviceStatus',
@@ -74,7 +75,8 @@ const Calendar = () => {
             _id: booking.bookingId,
             createdAt: booking.createdAt,
             customerName: booking.customer[0]?.name || '',
-            serviceStatus: booking.serviceStatus
+            serviceStatus: booking.serviceStatus,
+            assignedTo: booking?.employee?.[0]?.name || 'Not Assigned Yet'
           }))
         );
       } else {

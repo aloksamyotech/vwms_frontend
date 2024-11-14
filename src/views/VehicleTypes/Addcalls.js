@@ -25,7 +25,8 @@ const AddCalls = (props) => {
     vehicleType: yup
       .string()
       .required('Vehicle Type is required')
-      .test('len', 'Enter less than 50 characters', (val) => val && val.length < 50),
+      .max(50, 'Vehicle Type must be less than or equal to 50 characters')
+      .matches(/^[a-zA-Z0-9\s]*$/, 'Vehicle Type must not contain special characters'),
     file: yup.mixed().required('Image is required')
   });
 
@@ -129,7 +130,6 @@ const AddCalls = (props) => {
             variant="contained"
             onClick={formik.handleSubmit}
             style={{ textTransform: 'capitalize' }}
-            color="secondary"
             disabled={isLoading}
           >
             {isLoading ? 'Saving...' : 'Save'}

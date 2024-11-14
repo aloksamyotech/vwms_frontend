@@ -54,5 +54,8 @@ export const url = {
   },
   payments: {
     edit: 'payment/edit/'
+  },
+  login :{ 
+    login : 'user/login'
   }
 };

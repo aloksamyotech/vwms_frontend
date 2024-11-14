@@ -233,7 +233,7 @@ const AddLead = (props) => {
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={formik.handleSubmit} variant="contained" color="primary" type="submit" disabled={isLoading}>
+          <Button onClick={formik.handleSubmit} variant="contained" type="submit" disabled={isLoading}>
             {isLoading ? 'Updating...' : 'Update'}
           </Button>
           <Button
