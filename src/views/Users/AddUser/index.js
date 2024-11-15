@@ -44,7 +44,7 @@ const AddUser = ({ open, handleClose, onSuccess }) => {
 
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
-      <DialogTitle>Add User</DialogTitle>
+      <DialogTitle>Add Employee</DialogTitle>
       <DialogContent>
         <Formik
           initialValues={{
@@ -91,8 +91,8 @@ const AddUser = ({ open, handleClose, onSuccess }) => {
           {({ values, handleChange, errors, touched, setFieldValue }) => (
             <Form>
               <Card style={{ paddingTop: '15px' }}>
-                <Box width="100%" padding="30px">
-                  <Grid container spacing={1}>
+                <Box width="100%" padding="10px">
+                  <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                       <FormLabel>Name</FormLabel>
                       <Field
@@ -168,7 +168,7 @@ const AddUser = ({ open, handleClose, onSuccess }) => {
                       </Grid>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={12} container justifyContent="flex-end">
                       <Button variant="contained" color="primary" type="submit" disabled={isLoading}>
                         {isLoading ? 'Saving...' : 'Save'}
                       </Button>

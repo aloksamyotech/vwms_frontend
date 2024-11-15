@@ -15,7 +15,7 @@ import {
 import TableStyle from '../../ui-component/TableStyle';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { IconTrash, IconEdit } from '@tabler/icons';
-
+import moment from 'moment';
 import Iconify from '../../ui-component/iconify';
 import AddTask from './AddTask';
 import { url } from 'api/url';
@@ -34,6 +34,7 @@ const Task = () => {
       field: 'date',
       headerName: 'Date',
       flex: 1,
+      valueFormatter: ({ value }) => moment(value).format('MM-DD-YYYY'),
       cellClassName: 'name-column--cell name-column--cell--capitalize'
     },
     {
@@ -131,6 +132,7 @@ const Task = () => {
     const com_url = `${url.base_url}${url.inAndEx.all_inAndEx}`;
     try {
       const response = await allInAndEx(com_url);
+
       if (response) {
         setInAndExData(response?.data);
       }

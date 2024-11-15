@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { url } from 'api/url';
-import { editPayments } from 'api/apis';
+import { allBooking, editPayments } from 'api/apis';
 import { toast } from 'react-toastify';
 
 const validationSchema = Yup.object({
@@ -29,7 +29,7 @@ const PaymentDialog = ({ open, handleClose, onPaymentReceive, bookingData }) => 
     const totalPaidAmount = parseInt(paidAmount) + values.payAmount;
     const id = bookingData?.paymentId;
     const paymentData = {
-      paidAmount: values.payAmount,
+      paidAmount: values.payAmount || 0,
       remainingAmount: remainingAmount,
       totalPaidAmount: totalPaidAmount
     };
@@ -37,10 +37,11 @@ const PaymentDialog = ({ open, handleClose, onPaymentReceive, bookingData }) => 
     const com_url = `${url.base_url}${url.payments.edit}${id}`;
     const response = await editPayments(com_url, paymentData);
     if (response) {
-      toast.success(response.data.message);
+      toast.success('Payment Collect Successfully');
+
       onPaymentReceive();
     } else {
-      toast.success(response.data.message);
+      toast.success('Payment Collection Felid');
     }
   };
 

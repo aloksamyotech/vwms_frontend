@@ -10,6 +10,10 @@ import { allEmployee, editBooking } from 'api/apis';
 import moment from 'moment';
 
 const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
+  const getSelectedDate = bookingData?.slot_time;
+  const splitDate = getSelectedDate?.split(' ')[0];
+  const splitTime = getSelectedDate?.split(' ')[1];
+
   const [employees, setEmployees] = useState([]);
   const [packages, setPackage] = useState([]);
   const [assigned, setAssigned] = useState('');
@@ -31,13 +35,6 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
       toast.error('Fetching Error');
     }
   };
-
-  const convertSlotTime = (slotTime) => {
-    const formattedTime = moment(slotTime, 'YYYY-MM-DD h:mma').format('h:mmA');
-    const formattedDate = moment(slotTime, 'YYYY-MM-DD h:mma').format('DD-MM-YYYY');
-    return `${formattedTime} ${formattedDate}`;
-  };
-  const convertedTime = convertSlotTime(bookingData?.slot_time);
 
   const fetchPackage = async () => {
     const com_url = `${url.base_url}${url.package.all}`;
@@ -111,29 +108,48 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
 
       <DialogContent dividers sx={{ bgcolor: '#f4f6f8' }}>
         <form onSubmit={formik.handleSubmit}>
-          <Grid container spacing={3}>
+          <Grid container spacing={4}>
             <Grid item xs={12} sm={6}>
-              <Typography variant="body1" sx={{ color: '#333' }}>
-                Total Amount - <strong>₹{bookingData?.packagePrice || 0}.00</strong>
+              <Typography variant="h6" sx={{ color: '#333', fontWeight: 500 }}>
+                Total Amount
+              </Typography>
+              <Typography variant="h5" sx={{ color: '#333', fontWeight: 700 }}>
+                ₹{bookingData?.packagePrice || 0}.00
               </Typography>
             </Grid>
+
             <Grid item xs={12} sm={6}>
+              <Typography variant="h6" sx={{ color: '#333', fontWeight: 500 }}>
+                Booking Slot
+              </Typography>
               <Typography variant="body1" sx={{ color: '#333' }}>
-                Booked Time Slot - <strong>{convertedTime}</strong>
+                <strong>Date:</strong> {splitDate}
+              </Typography>
+              <Typography variant="body1" sx={{ color: '#333' }}>
+                <strong>Time:</strong> {splitTime}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
-              <Typography variant="body1" sx={{ color: '#333' }}>
-                Vehicle Type - <strong>{bookingData?.vehicleName || ''}</strong>
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="body1" sx={{ color: '#333' }}>
-                Package - <strong>{bookingData?.packageName || ''}</strong>
-              </Typography>
-            </Grid>
+
             <Grid item xs={12} sm={6}>
+              <Typography variant="h6" sx={{ color: '#333', fontWeight: 500 }}>
+                Vehicle Name
+              </Typography>
               <Typography variant="body1" sx={{ color: '#333' }}>
+                <strong>{bookingData?.vehicleName || 'N/A'}</strong>
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Typography variant="h6" sx={{ color: '#333', fontWeight: 500 }}>
+                Selected Package
+              </Typography>
+              <Typography variant="body1" sx={{ color: '#333' }}>
+                <strong>{bookingData?.packageName || 'N/A'}</strong>
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Typography variant="h6" sx={{ color: '#333', fontWeight: 500 }}>
                 Update Status
               </Typography>
               <Select
@@ -144,11 +160,14 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
                 onChange={formik.handleChange}
                 error={formik.touched.status && Boolean(formik.errors.status)}
                 sx={{
-                  backgroundColor: '#ffffff',
-                  borderRadius: '4px',
-                  boxShadow: 1,
+                  backgroundColor: '#fff',
+                  borderRadius: '8px',
+                  boxShadow: 2,
                   '&:hover': {
                     borderColor: '#3f51b5'
+                  },
+                  '& .MuiSelect-icon': {
+                    color: '#3f51b5'
                   }
                 }}
               >
@@ -166,8 +185,9 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
                 </MenuItem>
               </Select>
             </Grid>
+
             <Grid item xs={12} sm={6}>
-              <Typography variant="body1" sx={{ color: '#333' }}>
+              <Typography variant="h6" sx={{ color: '#333', fontWeight: 500 }}>
                 Assign To
               </Typography>
               <Select
@@ -178,22 +198,26 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
                 onChange={formik.handleChange}
                 error={formik.touched.assignedTo && Boolean(formik.errors.assignedTo)}
                 sx={{
-                  backgroundColor: '#ffffff',
-                  borderRadius: '4px',
-                  boxShadow: 1,
+                  backgroundColor: '#fff',
+                  borderRadius: '8px',
+                  boxShadow: 2,
                   '&:hover': {
                     borderColor: '#3f51b5'
+                  },
+                  '& .MuiSelect-icon': {
+                    color: '#3f51b5'
                   }
                 }}
               >
                 {employees.map((employee) => (
                   <MenuItem key={employee._id} value={employee._id}>
-                    {`${employee.name}`}
+                    {employee.name}
                   </MenuItem>
                 ))}
               </Select>
             </Grid>
           </Grid>
+
           <DialogActions sx={{ paddingTop: '20px', paddingBottom: '20px', bgcolor: '#f4f6f8' }}>
             <Button type="submit" variant="contained">
               Update

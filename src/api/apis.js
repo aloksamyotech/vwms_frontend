@@ -1,4 +1,4 @@
-import { createApi, deleteData, getAll, editData  , loginUser} from './api_helper';
+import { createApi, deleteData, getAll, editData, loginUser, registerUser } from './api_helper';
 
 export const createService = async (com_url, payload) => {
   const response = await createApi(com_url, payload);
@@ -102,6 +102,10 @@ export const createUser = async (com_url, payload) => {
   const response = await createApi(com_url, payload);
   return response;
 };
+export const registerUsers = async (com_url, payload) => {
+  const response = await registerUser(com_url, payload);
+  return response;
+};
 export const createBooking = async (com_url, payload) => {
   const response = await createApi(com_url, payload);
   return response;
@@ -111,6 +115,15 @@ export const allInAndEx = async (com_url) => {
   return response;
 };
 export const allBooking = async (com_url) => {
+  const response = await getAll(com_url);
+  return response;
+};
+export const IncomeAndExpenseReport = async (com_url) => {
+  const response = await getAll(com_url);
+  return response;
+};
+
+export const allPayments = async (com_url) => {
   const response = await getAll(com_url);
   return response;
 };

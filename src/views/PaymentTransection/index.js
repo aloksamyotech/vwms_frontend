@@ -1,15 +1,12 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from 'react';
-// @mui
 import { Stack, Container, Typography, Box, Card } from '@mui/material';
 import TableStyle from '../../ui-component/TableStyle';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-
 import AddContact from '../Contact/AddContact';
-
-// ----------------------------------------------------------------------
-
+import { url } from 'api/url';
+import { allPayments } from 'api/apis';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 const leadData = [
   {
     id: 1,
@@ -24,15 +21,16 @@ const leadData = [
 ];
 const Contact = () => {
   const [openAdd, setOpenAdd] = useState(false);
+  const [allPaymentsData, setAllPaymentsData] = useState([]);
   const columns = [
     {
-      field: 'bookingID',
+      field: 'bookingId',
       headerName: 'Booking ID',
       flex: 1,
       cellClassName: 'name-column--cell name-column--cell--capitalize'
     },
     {
-      field: 'name',
+      field: 'customerName',
       headerName: 'Name',
       flex: 1,
       cellClassName: 'name-column--cell--capitalize'
@@ -40,12 +38,12 @@ const Contact = () => {
     {
       field: 'amount',
       headerName: 'Amount',
-      flex: 1
+      flex: 0.7
     },
     {
-      field: 'txnID',
-      headerName: 'Txn ID',
-      flex: 1
+      field: 'email',
+      headerName: 'Email',
+      flex: 1.2
     },
     {
       field: 'status',
@@ -71,22 +69,33 @@ const Contact = () => {
           {params.value}
         </Box>
       )
-    },
-    {
-      field: 'emailAddress',
-      headerName: 'Email Address',
-      flex: 1
-    },
-    {
-      field: 'date',
-      headerName: 'Date',
-      flex: 1
-      // eslint-disable-next-line arrow-body-style
     }
+    // {
+    //   field: 'date',
+    //   headerName: 'Date',
+    //   flex: 1
+    // }
   ];
 
-  const handleOpenAdd = () => setOpenAdd(true);
   const handleCloseAdd = () => setOpenAdd(false);
+
+  const getAllPayments = async () => {
+    const com_url = `${url.base_url}${url.payments.all}`;
+    const response = await allPayments(com_url);
+    const data = response?.data;
+    const rowData = data?.map((item, index) => ({
+      _id: item._id,
+      amount: item.amount,
+      status: item.status,
+      customerName: item.customer?.[0]?.name,
+      bookingId: item.customer?.[0]?.bookingId,
+      email: item.customer?.[0]?.email
+    }));
+    setAllPaymentsData(rowData);
+  };
+  useEffect(() => {
+    getAllPayments();
+  }, []);
   return (
     <>
       <AddContact open={openAdd} handleClose={handleCloseAdd} />
@@ -98,10 +107,10 @@ const Contact = () => {
           <Box width="100%">
             <Card style={{ height: '600px', paddingTop: '15px' }}>
               <DataGrid
-                rows={leadData}
+                rows={allPaymentsData}
                 columns={columns}
                 checkboxSelection
-                getRowId={(row) => row.id}
+                getRowId={(row) => row._id}
                 slots={{ toolbar: GridToolbar }}
                 slotProps={{ toolbar: { showQuickFilter: true } }}
               />
