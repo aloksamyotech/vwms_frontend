@@ -19,7 +19,7 @@ const Calendar = () => {
       field: 'createdAt',
       headerName: 'Booking Date',
       flex: 0.7,
-      valueFormatter: ({ value }) => moment(value).format('MM/DD/YYYY')
+      valueFormatter: ({ value }) => moment(value).format('MM-DD-YYYY')
     },
     { field: '_id', headerName: 'Booking ID', flex: 1 },
     { field: 'assignedTo', headerName: 'Assigned To', flex: 1 },

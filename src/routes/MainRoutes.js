@@ -6,6 +6,7 @@ import Index from 'views/Settings/WebSetting';
 import PrivateRoutes from './PrivateRoute';
 
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
+const Login = Loadable(lazy(() => import('views/pages/authentication/authentication3/Login3')));
 const LeadManagement = Loadable(lazy(() => import('views/Packages')));
 const ContactManagement = Loadable(lazy(() => import('views/PaymentTransection')));
 const Call = Loadable(lazy(() => import('views/VehicleTypes')));

@@ -10,7 +10,8 @@ export const url = {
     create_inAndEx: 'inandex/create',
     all_inAndEx: 'inandex/all',
     delete_inAndEx: 'inandex/delete/',
-    edit: 'inandex/edit/'
+    edit: 'inandex/edit/',
+    allInAndExReport: 'inandex/all/inandexReport/'
   },
   user: {
     create_user: 'user/create',
@@ -53,9 +54,10 @@ export const url = {
     edit: 'employee/edit/'
   },
   payments: {
-    edit: 'payment/edit/'
+    edit: 'payment/edit/',
+    all: 'payment/all'
   },
-  login :{ 
-    login : 'user/login'
+  login: {
+    login: 'user/login'
   }
 };

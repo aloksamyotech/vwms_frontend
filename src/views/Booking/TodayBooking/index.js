@@ -27,7 +27,24 @@ const Documents = () => {
       field: 'id',
       headerName: 'Booking ID',
       flex: 0.7,
-      cellClassName: 'name-column--cell name-column--cell--capitalize'
+      cellClassName: 'name-column--cell name-column--cell--capitalize',
+      renderCell: (params) => (
+        <Button
+          variant="text"
+          sx={{
+            textTransform: 'none',
+            padding: 0,
+            fontWeight: 'bold',
+            color: 'primary.main',
+            '&:hover': {
+              backgroundColor: 'transparent'
+            }
+          }}
+          onClick={() => handleOpenView(params.row)}
+        >
+          {params.value}
+        </Button>
+      )
     },
     {
       field: 'name',
@@ -39,7 +56,7 @@ const Documents = () => {
       field: 'date',
       headerName: 'Booking Date',
       flex: 0.7,
-      valueFormatter: (params) => moment(params.value).format('MM:DD:YYYY')
+      valueFormatter: (params) => moment(params.value).format('MM-DD-YYYY')
     },
     {
       field: 'paymentStatus',

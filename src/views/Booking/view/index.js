@@ -12,9 +12,14 @@ const BookingDetails = () => {
 
   const [paymentDialogOpen, setPaymentDialogOpen] = useState(false);
 
+  const getSelectedDate = bookingData?.slot_time;
+  const splitDate = getSelectedDate?.split(' ')[0];
+  const splitTime = getSelectedDate?.split(' ')[1];
+
   const handleReceivePayment = () => {
     setPaymentDialogOpen(false);
   };
+
   const downloadInvoice = () => {
     const doc = new jsPDF('p', 'mm', [148, 210]);
 
@@ -63,10 +68,10 @@ const BookingDetails = () => {
           display: 'flex',
           backgroundColor: '#1976d2',
           justifyContent: 'space-between',
-          alignItems: 'center', // Center the content vertically
+          alignItems: 'center',
           marginBottom: '20px',
-          borderRadius: '8px', // Add rounded corners
-          padding: '10px 20px' // Add padding to ensure spacing
+          borderRadius: '8px',
+          padding: '10px 20px'
         }}
       >
         <Typography variant="h6" style={{ color: 'white' }}>
@@ -78,8 +83,8 @@ const BookingDetails = () => {
           onClick={() => window.history.back()}
           style={{
             cursor: 'pointer',
-            borderColor: 'red',
-            color: 'red',
+            borderColor: 'white',
+            color: 'white',
             marginLeft: '20px',
             borderRadius: '4px'
           }}
@@ -97,7 +102,13 @@ const BookingDetails = () => {
               </Typography>
               <Typography variant="subtitle1">Booking Id - {bookingData?.id}</Typography>
               <Typography variant="subtitle1">
-                Selected Slot Time - <strong>{bookingData?.slot_time || ''}</strong>
+                <strong>{'Selected Slot  - '}</strong>
+              </Typography>
+              <Typography variant="subtitle1">
+                Date - <strong>{splitDate || ''}</strong>
+              </Typography>
+              <Typography variant="subtitle1">
+                Time - <strong>{splitTime || ''}</strong>
               </Typography>
               <Typography variant="subtitle1">
                 Vehicle Type - <strong>{bookingData?.vehicleName || ''}</strong>

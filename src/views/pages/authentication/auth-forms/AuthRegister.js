@@ -78,12 +78,23 @@ const FirebaseRegister = ({ ...others }) => {
           name: '',
           email: '',
           password: '',
-          role: 'user',
-          agree: checked,
-          submit: null
+          role: 'employee',
+          agree: checked
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
+          values.permissions = {
+            vehicleType: true,
+            serviceList: true,
+            packages: true,
+            bookings: true,
+            paymentTransaction: true,
+            outOfService: true,
+            incomeExpense: true,
+            users: true,
+            reports: true
+          };
+
           axios
             .post('http://localhost:8080/user/create', values)
             .then((res) => {
@@ -91,12 +102,11 @@ const FirebaseRegister = ({ ...others }) => {
                 toast.warning(`${res?.data?.message}`);
                 resetForm();
               } else {
-                toast.success(res?.data?.message || "Registered Successfully");
+                toast.success(res?.data?.message || 'Registered Successfully');
                 resetForm();
                 setTimeout(() => {
                   navigate('/login');
-                }, 1000)
-
+                }, 1000);
               }
             })
             .catch((err) => {
@@ -138,9 +148,8 @@ const FirebaseRegister = ({ ...others }) => {
                       minWidth: '200px'
                     }}
                   >
-                    <MenuItem value="user">User</MenuItem>
+                    <MenuItem value="employee">Employee</MenuItem>
                     <MenuItem value="admin">Admin</MenuItem>
-                    <MenuItem value="other">Other</MenuItem>
                   </Field>
                   {touched.role && errors.role && <FormHelperText>{errors.role}</FormHelperText>}
                 </FormControl>

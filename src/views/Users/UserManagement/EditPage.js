@@ -60,9 +60,7 @@ const AddUser = ({ open, handleClose, EditData, onSuccess }) => {
                 outOfService: EditData?.permissions?.outOfService || false,
                 incomeExpense: EditData?.permissions?.incomeExpense || false,
                 users: EditData?.permissions?.users || false,
-                reports: EditData?.permissions?.reports || false,
-                settings: EditData?.permissions?.settings || false,
-                integration: EditData?.permissions?.integration || false
+                reports: EditData?.permissions?.reports || false
               }
             }}
             validationSchema={validationSchema}
@@ -86,10 +84,9 @@ const AddUser = ({ open, handleClose, EditData, onSuccess }) => {
           >
             {({ values, handleChange, errors, touched }) => (
               <Form>
-                <Card style={{ paddingTop: '15px' }}>
-                  <Box width="100%" padding="30px">
-                    <Grid container spacing={1}>
-                      {/* Name Field */}
+                <Card style={{ paddingTop: '10px' }}>
+                  <Box width="100%" padding="10px">
+                    <Grid container spacing={2}>
                       <Grid item xs={12} sm={6}>
                         <FormLabel>Name</FormLabel>
                         <Field
@@ -103,7 +100,6 @@ const AddUser = ({ open, handleClose, EditData, onSuccess }) => {
                         />
                       </Grid>
 
-                      {/* Role Field (Disabled) */}
                       <Grid item xs={12} sm={6}>
                         <FormLabel>Role</FormLabel>
                         <Field
@@ -118,7 +114,6 @@ const AddUser = ({ open, handleClose, EditData, onSuccess }) => {
                         />
                       </Grid>
 
-                      {/* Permissions Checkboxes */}
                       <Grid item xs={12}>
                         <FormLabel component="legend" style={{ marginBottom: '20px' }}>
                           User Permissions
@@ -139,29 +134,16 @@ const AddUser = ({ open, handleClose, EditData, onSuccess }) => {
                             </Grid>
                           ))}
                         </Grid>
-                      </Grid>
 
-                      {/* Dialog Actions */}
-                      <DialogActions>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          color="primary"
-                          style={{ textTransform: 'capitalize' }}
-                          disabled={isLoading}
-                        >
-                          {isLoading ? 'Updating...' : 'Update'}
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="outlined"
-                          style={{ textTransform: 'capitalize' }}
-                          onClick={handleClose}
-                          color="error"
-                        >
-                          Cancel
-                        </Button>
-                      </DialogActions>
+                        <Grid item xs={12} container justifyContent="flex-end">
+                          <Button variant="contained" color="primary" type="submit" disabled={isLoading}>
+                            {isLoading ? 'Updating...' : 'Update'}
+                          </Button>
+                          <Button onClick={handleClose} variant="outlined" style={{ marginLeft: '10px' }} color="error">
+                            Cancel
+                          </Button>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Box>
                 </Card>

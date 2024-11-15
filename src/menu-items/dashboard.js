@@ -160,13 +160,16 @@ const dashboard = {
 };
 
 const token = localStorage.getItem('token');
-if (!token) {
-  console.error('No token found');
+
+let userPermissions = [];
+if (token) {
+  try {
+    const decodeJwt = jwtDecode(token);
+    userPermissions = decodeJwt.permissions || [];
+  } catch (error) {
+    console.error('Invalid token', error);
+  }
 }
-
-const decodeJwt = jwtDecode(token);
-
-const userPermissions = decodeJwt.permissions;
 
 const filterDashboardByPermissions = (permissions, dashboard) => {
   const filteredDashboard = {
