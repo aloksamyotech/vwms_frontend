@@ -1,4 +1,4 @@
-import { createApi, deleteData, getAll, editData } from './api_helper';
+import { createApi, deleteData, getAll, editData  , loginUser} from './api_helper';
 
 export const createService = async (com_url, payload) => {
   const response = await createApi(com_url, payload);
@@ -89,6 +89,11 @@ export const createInAndEx = async (com_url, payload) => {
   const response = await createApi(com_url, payload);
   return response;
 };
+export const loggedUser = async (com_url, payload) => {
+  const response = await loginUser(com_url, payload);
+  return response;
+};
+
 export const createPackage = async (com_url, payload) => {
   const response = await createApi(com_url, payload);
   return response;

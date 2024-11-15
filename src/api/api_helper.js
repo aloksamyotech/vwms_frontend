@@ -19,3 +19,8 @@ export const editData = async (com_url, payload) => {
   const response = await axios.patch(com_url, payload);
   return response;
 };
+
+export const loginUser = async (com_url, payload) => {
+  const response = await axios.post(com_url, payload);
+  return response;
+};

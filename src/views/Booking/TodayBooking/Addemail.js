@@ -20,7 +20,6 @@ import { useState, useEffect } from 'react';
 const AddEmails = (props) => {
   const { open, handleClose, onSuccess } = props;
   const [allServices, setAllService] = useState([]);
-  const [allPackage, setAllPackage] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = yup.object({
@@ -198,7 +197,7 @@ const AddEmails = (props) => {
               </Grid>
             </DialogContentText>
             <DialogActions>
-              <Button type="submit" variant="contained" style={{ textTransform: 'capitalize' }} color="secondary" disabled={isLoading}>
+              <Button type="submit" variant="contained" style={{ textTransform: 'capitalize' }} disabled={isLoading}>
                 {isLoading ? 'Saving...' : 'Save'}
               </Button>
               <Button

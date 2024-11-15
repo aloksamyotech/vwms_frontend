@@ -64,7 +64,9 @@ const AddTask = ({ open, handleClose, onSuccess }) => {
             justifyContent: 'space-between'
           }}
         >
-          <Typography variant="h6">Create Task </Typography>
+          
+          
+          <Typography variant="h6">Create New</Typography>
           <Typography>
             <ClearIcon onClick={handleClose} style={{ cursor: 'pointer' }} />
           </Typography>
@@ -133,7 +135,6 @@ const AddTask = ({ open, handleClose, onSuccess }) => {
                     type="number"
                     placeholder="Enter amount"
                     label=""
-                    x
                     fullWidth
                     size="small"
                     value={formik.values.amount}
@@ -152,7 +153,6 @@ const AddTask = ({ open, handleClose, onSuccess }) => {
             variant="contained"
             onClick={formik.handleSubmit}
             style={{ textTransform: 'capitalize' }}
-            color="secondary"
             disabled={isLoading}
           >
             {isLoading ? 'Saving...' : 'Save'}

@@ -4,8 +4,6 @@ import {
   Grid,
   TextField,
   FormControl,
-  Select,
-  MenuItem,
   Checkbox,
   FormControlLabel,
   FormLabel,
@@ -45,7 +43,7 @@ const AddUser = ({ open, handleClose, EditData, onSuccess }) => {
   return (
     <Container>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
-        <DialogTitle>Edit User</DialogTitle>
+        <DialogTitle>Edit Employee</DialogTitle>
         <DialogContent>
           <Formik
             initialValues={{
@@ -54,17 +52,17 @@ const AddUser = ({ open, handleClose, EditData, onSuccess }) => {
               password: EditData?.password || '',
               role: EditData?.role || 'other',
               permissions: {
-                vehicleType: EditData?.vehicleType || false,
-                serviceList: EditData?.serviceList || false,
-                packages: EditData?.packages || false,
-                bookings: EditData?.bookings || false,
-                paymentTransaction: EditData?.paymentTransaction || false,
-                outOfService: EditData?.outOfService || false,
-                incomeExpense: EditData?.incomeExpense || false,
-                users: EditData?.user || false,
-                reports: EditData?.reports || false,
-                settings: EditData?.settings || false,
-                integration: EditData?.integration || false
+                vehicleType: EditData?.permissions?.vehicleType || false,
+                serviceList: EditData?.permissions?.serviceList || false,
+                packages: EditData?.permissions?.packages || false,
+                bookings: EditData?.permissions?.bookings || false,
+                paymentTransaction: EditData?.permissions?.paymentTransaction || false,
+                outOfService: EditData?.permissions?.outOfService || false,
+                incomeExpense: EditData?.permissions?.incomeExpense || false,
+                users: EditData?.permissions?.users || false,
+                reports: EditData?.permissions?.reports || false,
+                settings: EditData?.permissions?.settings || false,
+                integration: EditData?.permissions?.integration || false
               }
             }}
             validationSchema={validationSchema}
@@ -91,6 +89,7 @@ const AddUser = ({ open, handleClose, EditData, onSuccess }) => {
                 <Card style={{ paddingTop: '15px' }}>
                   <Box width="100%" padding="30px">
                     <Grid container spacing={1}>
+                      {/* Name Field */}
                       <Grid item xs={12} sm={6}>
                         <FormLabel>Name</FormLabel>
                         <Field
@@ -103,17 +102,23 @@ const AddUser = ({ open, handleClose, EditData, onSuccess }) => {
                           helperText={touched.name && errors.name}
                         />
                       </Grid>
+
+                      {/* Role Field (Disabled) */}
                       <Grid item xs={12} sm={6}>
                         <FormLabel>Role</FormLabel>
-                        <FormControl fullWidth size="small">
-                          <Field name="role" as={Select} defaultValue="other" error={touched.role && !!errors.role}>
-                            <MenuItem value="admin">Admin</MenuItem>
-                            <MenuItem value="user">User</MenuItem>
-                            <MenuItem value="other">Other</MenuItem>
-                          </Field>
-                        </FormControl>
+                        <Field
+                          name="role"
+                          disabled
+                          as={TextField}
+                          placeholder="Role"
+                          fullWidth
+                          size="small"
+                          error={touched.role && !!errors.role}
+                          helperText={touched.role && errors.role}
+                        />
                       </Grid>
 
+                      {/* Permissions Checkboxes */}
                       <Grid item xs={12}>
                         <FormLabel component="legend" style={{ marginBottom: '20px' }}>
                           User Permissions
@@ -136,15 +141,16 @@ const AddUser = ({ open, handleClose, EditData, onSuccess }) => {
                         </Grid>
                       </Grid>
 
+                      {/* Dialog Actions */}
                       <DialogActions>
                         <Button
                           type="submit"
                           variant="contained"
-                          style={{ textTransform: 'capitalize' }}
                           color="primary"
+                          style={{ textTransform: 'capitalize' }}
                           disabled={isLoading}
                         >
-                          {isLoading ? 'Saving...' : 'Save'}
+                          {isLoading ? 'Updating...' : 'Update'}
                         </Button>
                         <Button
                           type="button"

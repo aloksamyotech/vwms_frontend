@@ -1,3 +1,4 @@
+import { jwtDecode } from 'jwt-decode';
 import {
   IconHome,
   IconPackage,
@@ -19,132 +20,109 @@ import {
   IconBus
 } from '@tabler/icons';
 
-const icons = {
-  IconHome,
-  IconHistory,
-  IconBrandPaypay,
-  IconPackage,
-  IconPassword,
-  IconReport,
-  IconCalendarEvent,
-  IconMail,
-  IconSettings,
-  IconFileUpload,
-  IconBrandMastercard,
-  IconFileInvoice,
-  IconBus,
-  IconAntennaBars5,
-  IconChecklist,
-  IconNotebook,
-  IconPhoneCheck,
-  IconUsers
-};
-
 const dashboard = {
   title: 'Dashboard-Menu',
   type: 'group',
   children: [
     {
       id: 'default',
+      permission: 'Dashboard',
       title: 'Dashboard',
       type: 'item',
       url: '/dashboard/default',
-      icon: icons.IconHome,
+      icon: IconHome,
       breadcrumbs: false
     },
     {
       id: '06',
-      title: 'Vehicle Types',
+      permission: 'vehicleType',
+      title: 'Vehicle Type',
       type: 'item',
       url: '/dashboard/call',
-      icon: icons.IconBus,
+      icon: IconBus,
       breadcrumbs: false
     },
-    // {
-    //   id: '05',
-    //   title: 'Service List',
-    //   type: 'item',
-    //   url: '/dashboard/meeting',
-    //   icon: icons.IconUsers,
-    //   breadcrumbs: false
-    // },
-
     {
       id: '01',
+      permission: 'packages',
       title: 'Packages',
       type: 'item',
       url: '/dashboard/lead',
-      icon: icons.IconPackage,
+      icon: IconPackage,
       breadcrumbs: false
     },
-
     {
       id: '11',
-      title: 'Booking',
+      permission: 'bookings',
+      title: 'Bookings',
       type: 'collapse',
       children: [
         {
           id: '07',
-          title: 'Today Booking',
+          permission: 'bookings',
+          title: 'Today Bookings',
           type: 'item',
           url: '/dashboard/today/booking',
-          // icon: icons.IconMail,
           breadcrumbs: false
         },
         {
           id: '09',
+          permission: 'bookings',
           title: 'All Booking',
           type: 'item',
           url: '/dashboard/document',
-          // icon: icons.IconFileUpload,
           breadcrumbs: false
         }
       ],
-      icon: icons.IconMail,
+      icon: IconMail,
       breadcrumbs: false
     },
     {
       id: '02',
-      title: 'Payment Transacation',
+      permission: 'paymentTransaction',
+      title: 'Payment Transaction',
       type: 'item',
       url: '/dashboard/contact',
-      icon: icons.IconBrandPaypay,
+      icon: IconBrandPaypay,
       breadcrumbs: false
     },
     {
       id: '03',
-      title: 'Out of service',
+      permission: 'outOfService',
+      title: 'Holiday',
       type: 'item',
       url: '/dashboard/policy',
-      icon: icons.IconNotebook,
+      icon: IconNotebook,
       breadcrumbs: false
     },
     {
       id: '19',
-      title: 'Income and Expense',
+      permission: 'incomeExpense',
+      title: 'Income And Expense',
       type: 'item',
       url: '/dashboard/task',
-      icon: icons.IconHistory,
+      icon: IconHistory,
       breadcrumbs: false
     },
-
     {
       id: '12',
+      permission: 'reports',
       title: 'Reports',
       type: 'collapse',
-      icon: icons.IconReport,
+      icon: IconReport,
       children: [
         {
           id: '08',
-          title: 'Bookings',
+          permission: 'bookings',
+          title: 'Booking Reports',
           type: 'item',
           url: '/dashboard/calender',
-
           breadcrumbs: false
         },
         {
           id: '10',
-          title: 'Income & Expenses',
+          permission: 'incomeExpense',
+          title: 'Income And Expense Report',
           type: 'item',
           url: '/dashboard/emailtemplate',
           breadcrumbs: false
@@ -153,132 +131,61 @@ const dashboard = {
     },
     {
       id: '29',
-      title: 'User',
+      permission: 'users',
+      title: 'Users',
       type: 'item',
       url: '/dashboard/user/usermanagement',
-      icon: icons.IconUsers,
+      icon: IconUsers,
       breadcrumbs: false
     },
     {
       id: '23',
+      permission: 'Employee',
       title: 'Employee',
       type: 'item',
       url: '/dashboard/employee/employeemanagement',
-      icon: icons.IconUsers,
+      icon: IconUsers,
       breadcrumbs: false
     },
-    // {
-    //   id: '13',
-    //   title: 'Settings',
-    //   type: 'collapse',
-    //   icon: icons.IconSettings,
-    //   children: [
-    //     {
-    //       id: '14',
-    //       title: 'Website Setting',
-    //       type: 'item',
-    //       url: '/dashboard/settings/websetting',
-    //       breadcrumbs: false
-    //     },
-    //     {
-    //       id: '14',
-    //       title: 'Payment Setting',
-    //       type: 'item',
-    //       url: '/dashboard/settings/paymentsetting',
-    //       breadcrumbs: false
-    //     },
-    //     {
-    //       id: '14',
-    //       title: 'SMTP Configuration',
-    //       type: 'item',
-    //       url: '/dashboard/settings/smtpconfig',
-    //       breadcrumbs: false
-    //     },
-    //     {
-    //       id: '14',
-    //       title: 'Twilio Configuration',
-    //       type: 'item',
-    //       url: '/dashboard/settings/smssetting',
-    //       breadcrumbs: false
-    //     }
-    //   ]
-    // },
-    // {
-    //   id: '15',
-    //   title: 'Master Data',
-    //   type: 'collapse',
-    //   icon: icons.IconBrandMastercard,
-    //   children: [
-    //     {
-    //       id: '14',
-    //       title: 'Email Template',
-    //       type: 'item',
-    //       url: '/dashboard/masterdata/emailtemplate',
-    //       breadcrumbs: false
-    //     },
-    //     {
-    //       id: '16',
-    //       title: 'SMS Template',
-    //       type: 'item',
-    //       url: '/dashboard/masterdata/smstemplate',
-    //       breadcrumbs: false
-    //     },
-    //     {
-    //       id: '17',
-    //       title: 'Service Status',
-    //       type: 'item',
-    //       url: '/dashboard/masterdata/servicestatus',
-    //       breadcrumbs: false
-    //     }
-    //   ]
-    // },
-    // {
-    //   id: '18',
-    //   title: 'User',
-    //   type: 'collapse',
-    //   icon: icons.IconUsers,
-    //      url: '/dashboard/user/usermanagement',
-    // children: [
-    //   {
-    //     id: '19',
-    //     title: 'User ManageMent',
-    //     type: 'item',
-    //     url: '/dashboard/user/usermanagement',
-    //     breadcrumbs: false
-    //   }
-    //   // {
-    //   //   id: '19',
-    //   //   title: 'Add User',
-    //   //   type: 'item',
-    //   //   url: '/dashboard/user/adduser',
-    //   //   breadcrumbs: false
-    //   // }
-    // ]
-    // },
-    // {
-    //   id: '19',
-    //   title: 'Employee',
-    //   type: 'collapse',
-    //   icon: icons.IconUsers,
-    //   children: [
-    //     {
-    //       id: '19',
-    //       title: 'Employee ManageMent',
-    //       type: 'item',
-    //       url: '/dashboard/employee/employeemanagement',
-    //       breadcrumbs: false
-    //     }
-    //   ]
-    // },
     {
       id: '25',
+      permission: 'Reset Password',
       title: 'Reset Password',
       type: 'item',
       url: '/dashboard/resetpassword',
-      icon: icons.IconPassword,
+      icon: IconPassword,
       breadcrumbs: false
     }
   ]
 };
 
-export default dashboard;
+const token = localStorage.getItem('token');
+if (!token) {
+  console.error('No token found');
+}
+
+const decodeJwt = jwtDecode(token);
+
+const userPermissions = decodeJwt.permissions;
+
+const filterDashboardByPermissions = (permissions, dashboard) => {
+  const filteredDashboard = {
+    title: dashboard.permission,
+    type: dashboard.type,
+    children: dashboard.children
+      .filter((child) => {
+        return permissions.includes(child.permission);
+      })
+      .map((child) => {
+        if (child.children && child.children.length > 0) {
+          child.children = child.children.filter((subChild) => permissions.includes(subChild.permission));
+        }
+        return child;
+      })
+  };
+  return filteredDashboard;
+};
+
+const filteredDashboard = filterDashboardByPermissions(userPermissions, dashboard);
+
+export default filteredDashboard;

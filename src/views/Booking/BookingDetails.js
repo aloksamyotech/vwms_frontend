@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { url } from 'api/url';
 import { allEmployee, editBooking } from 'api/apis';
+import moment from 'moment';
 
 const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
   const [employees, setEmployees] = useState([]);
@@ -18,7 +19,7 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
   });
 
   const fetchEmployeeData = async () => {
-    const com_url = `${url.base_url}${url.employee.all}`;
+    const com_url = `${url.base_url}${url.user.all_user}`;
     try {
       const response = await allEmployee(com_url);
       if (response) {
@@ -31,10 +32,18 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
     }
   };
 
+  const convertSlotTime = (slotTime) => {
+    const formattedTime = moment(slotTime, 'YYYY-MM-DD h:mma').format('h:mmA');
+    const formattedDate = moment(slotTime, 'YYYY-MM-DD h:mma').format('DD-MM-YYYY');
+    return `${formattedTime} ${formattedDate}`;
+  };
+  const convertedTime = convertSlotTime(bookingData?.slot_time);
+
   const fetchPackage = async () => {
     const com_url = `${url.base_url}${url.package.all}`;
     try {
       const response = await allEmployee(com_url);
+
       if (response) {
         setPackage(response.data);
       } else {
@@ -50,14 +59,11 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
     fetchPackage();
   }, []);
 
-  const filteredEmployees = employees.filter((employee) => !(employee._id === bookingData?.employeeId));
-
   const formik = useFormik({
     initialValues: {
       status: bookingData?.serviceStatus || '',
-      assignedTo: bookingData?.employeeId || ''
+      assignedTo: bookingData?.employeeId ? bookingData?.employeeId : ''
     },
-
     validationSchema,
     enableReinitialize: true,
     onSubmit: async (values, { resetForm }) => {
@@ -95,7 +101,7 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
     <Dialog open={open} onClose={handleClose} aria-labelledby="booking-details-dialog-title">
       <DialogTitle
         id="booking-details-dialog-title"
-        sx={{ display: 'flex', justifyContent: 'space-between', bgcolor: '#3f51b5', color: 'white', padding: '16px' }}
+        sx={{ display: 'flex', justifyContent: 'space-between', bgcolor: '#1976d2', color: 'white', padding: '16px' }}
       >
         <Typography variant="h6" sx={{ color: 'white' }}>
           Change Booking Status
@@ -113,7 +119,7 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography variant="body1" sx={{ color: '#333' }}>
-                Booked Time Slot - <strong>{bookingData?.slot_time}</strong>
+                Booked Time Slot - <strong>{convertedTime}</strong>
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -180,17 +186,17 @@ const BookingDetails = ({ open, handleClose, bookingData, onSuccess }) => {
                   }
                 }}
               >
-                {filteredEmployees.map((employee) => (
+                {employees.map((employee) => (
                   <MenuItem key={employee._id} value={employee._id}>
-                    {`${employee.firstName} ${employee.lastName}`}
+                    {`${employee.name}`}
                   </MenuItem>
                 ))}
               </Select>
             </Grid>
           </Grid>
           <DialogActions sx={{ paddingTop: '20px', paddingBottom: '20px', bgcolor: '#f4f6f8' }}>
-            <Button type="submit" variant="contained" color="primary" sx={{ bgcolor: '#3f51b5', '&:hover': { bgcolor: '#303f9f' } }}>
-              Save
+            <Button type="submit" variant="contained">
+              Update
             </Button>
             <Button
               variant="outlined"

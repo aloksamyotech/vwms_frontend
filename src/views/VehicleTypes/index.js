@@ -95,9 +95,6 @@ const Call = () => {
         <Stack>
           <Button
             variant="contained"
-            style={{
-              backgroundColor: '#36d962'
-            }}
             sx={{
               width: '70px',
               height: '30px',
@@ -150,10 +147,10 @@ const Call = () => {
         const id = selectedRow._id;
         const com_url = `${url.base_url}${url.vehicle_type.delete}${id}`;
         const response = await deleteVehicleType(com_url);
-        toast.success('Service deleted successfully');
+        toast.success('Deleted successfully');
         await fetchData();
       } catch (error) {
-        toast.error('Error deleting service');
+        toast.error('Error Deleting ');
       } finally {
         setOpenConfirm(false);
         setSelectedRow(null);
@@ -219,10 +216,10 @@ const Call = () => {
             <DialogContentText>Are you sure you want to delete?</DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseConfirm} color="primary">
+            <Button onClick={handleCloseConfirm} color="error" variant="outlined">
               No
             </Button>
-            <Button onClick={handleConfirmDelete} color="secondary" variant="contained">
+            <Button onClick={handleConfirmDelete} variant="contained">
               Yes
             </Button>
           </DialogActions>

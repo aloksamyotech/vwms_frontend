@@ -97,6 +97,7 @@ const UserManagement = () => {
     const com_url = `${url.base_url}${url.user.all_user}`;
     try {
       const response = await allUser(com_url);
+
       if (response) {
         setAllUserData(response?.data);
       }
@@ -115,7 +116,7 @@ const UserManagement = () => {
 
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
-          <Typography variant="h3">User List</Typography>
+          <Typography variant="h3">Employee List</Typography>
           <Stack direction="row" alignItems="center" justifyContent={'flex-end'} spacing={2}>
             <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAdd}>
               Add New

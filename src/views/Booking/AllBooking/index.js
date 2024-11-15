@@ -15,7 +15,6 @@ import { IconEdit } from '@tabler/icons'; //
 
 const Documents = () => {
   const [openAdd, setOpenAdd] = useState(false);
-
   const [bookingData, setBookingData] = useState([]);
   const [showData, setShowData] = useState([]);
   const [showBookingData, setShowBookingData] = useState([]);
@@ -137,6 +136,7 @@ const Documents = () => {
 
   const handleOpenBooking = (row) => {
     setShowBookingData(row);
+
     setShowBooking(true);
   };
   const handleCloseBooking = () => {
@@ -175,8 +175,8 @@ const Documents = () => {
         remainingAmount: item?.payments?.[0]?.remainingAmount,
         totalPaidAmount: item?.payments?.[0]?.totalPaidAmount,
         customerPhone: item?.type?.[0]?.phone,
-        employeeFirstName: item?.employee?.[0]?.firstName,
-        employeeLastName: item?.employee?.[0]?.lastName
+        employeeName: item?.employee?.[0]?.name,
+        employeeId: item?.employee?.[0]?._id
       }));
       setShowData(rowData);
       setBookingData(rowData);

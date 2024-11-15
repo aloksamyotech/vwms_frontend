@@ -58,9 +58,32 @@ const BookingDetails = () => {
 
   return (
     <div style={{ padding: '20px', backgroundColor: '#fff', borderRadius: '8px', minHeight: '80vh', position: 'relative' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-        <Typography variant="h6">Booking Details</Typography>
-        <Button variant="outlined" color="error" onClick={() => window.history.back()} style={{ cursor: 'pointer' }}>
+      <div
+        style={{
+          display: 'flex',
+          backgroundColor: '#1976d2',
+          justifyContent: 'space-between',
+          alignItems: 'center', // Center the content vertically
+          marginBottom: '20px',
+          borderRadius: '8px', // Add rounded corners
+          padding: '10px 20px' // Add padding to ensure spacing
+        }}
+      >
+        <Typography variant="h6" style={{ color: 'white' }}>
+          Booking Details
+        </Typography>
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={() => window.history.back()}
+          style={{
+            cursor: 'pointer',
+            borderColor: 'red',
+            color: 'red',
+            marginLeft: '20px',
+            borderRadius: '4px'
+          }}
+        >
           Back
         </Button>
       </div>
@@ -86,12 +109,7 @@ const BookingDetails = () => {
                 Booking Status - <strong>{bookingData?.serviceStatus || ''}</strong>
               </Typography>
               <Typography variant="subtitle1">
-                Assigned To -
-                <strong>
-                  {bookingData?.employeeFirstName && bookingData?.employeeLastName
-                    ? `${bookingData.employeeFirstName} ${bookingData.employeeLastName}`
-                    : 'Not Assigned'}
-                </strong>
+                Assigned To -<strong>{bookingData?.employeeName ? `${bookingData.employeeName} ` : 'Not Assigned'}</strong>
               </Typography>
 
               <Grid container spacing={2} style={{ marginTop: '10px' }}>
